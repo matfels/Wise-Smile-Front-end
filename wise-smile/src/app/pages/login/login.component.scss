@@ -1,0 +1,125 @@
+
+.login-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* Ocupa 100% da altura da tela */
+    background-color: var(--primary-light); /* Usa o fundo clarinho que você definiu */
+    padding: 2rem;
+}
+
+
+.login-card {
+    background-color: var(--white);
+    border-radius: 20px;
+    padding: 3rem 2.5rem;
+    width: 100%;
+    max-width: 420px;
+    /* Sombra usando a cor primária para manter a harmonia */
+    box-shadow: 0 10px 25px rgba(29, 22, 91, 0.1); 
+    text-align: center;
+    border: 1px solid var(--border-color);
+}
+
+.login-subtitle {
+    color: var(--text-light);
+    font-size: 1rem;
+    margin-bottom: 2.5rem;
+    font-weight: 500;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.input-group {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.text-color {
+    color:black
+
+}
+
+.logo-icon-login{
+    color: #1d165b;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 1rem 1rem 1rem 3rem; /* Espaço para o ícone */
+    border: 2px solid var(--border-color);
+    border-radius: 14px;
+    font-size: 1rem;
+    color: var(--text-dark);
+    background-color: #f9fafb;
+    outline: none;
+    transition: var(--transition);
+
+}
+
+.input-group input:focus {
+    border-color: var(--primary); /* Borda fica azul ao clicar */
+    background-color: var(--white);
+}
+
+
+.input-icon {
+    position: absolute;
+    left: 1rem;
+    width: 20px;
+    height: 20px;
+    color: var(--text-light);
+    transition: var(--transition);
+}
+
+.input-group input:focus + .input-icon {
+    color: var(--primary); /* Ícone fica azul ao clicar */
+}
+
+
+.btn-next {
+    width: 100%;
+    background-color: var(--primary); /* Fundo Azul Escuro */
+    color: var(--white); /* Letra Amarela */
+    border: none;
+    padding: 1rem;
+    border-radius: 50px; /* Mantendo o padrão arredondado da página inicial */
+    font-weight: 700;
+    font-size: 1.05rem;
+    cursor: pointer;
+    transition: var(--transition);
+    margin-top: 1rem;
+    box-shadow: 0 4px 6px -1px rgba(29, 22, 91, 0.2);
+}
+
+.btn-next:hover {
+    background-color: var(--primary-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 15px -3px rgba(29, 22, 91, 0.3);
+}
+
+/* ==========================================================================
+   RODAPÉ
+   ========================================================================== */
+.login-footer {
+    margin-top: 2rem;
+    font-size: 0.9rem;
+    color: var(--text-light);
+}
+
+.login-footer a {
+    color: var(--primary);
+    font-weight: 700;
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+.login-footer a:hover {
+    text-decoration: underline;
+    color: var(--primary-hover);
+}
