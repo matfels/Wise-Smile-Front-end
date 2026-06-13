@@ -1,1 +1,41 @@
-/* You can add global styles to this file, and also import other style files */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Variaveis de cores */
+:root  {
+    --primary: #1d165b;
+    --primary-hover: #1d1528;
+    --primary-light: #ffd90025;
+    --text-main: #FFD700;
+    --text-dark: #000000;
+    --text-light: #6b7280;
+    --white: #ffffff;
+    --border-color: #e1dfed;
+    --font-stack: 'Inter', sans-serif;
+    --max-width: 1200px;
+    --transition: all 0.3s ease;
+
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-stack);
+    color: var(--text-main);
+    background-color: var(--white);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+}
+
+a  {
+    text-decoration: none;
+    color: inherit;
+}
