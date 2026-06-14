@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms'; //Habilita a leitura de formulários 
+import { AuthService } from '../../services/auth.service'; // Importa o arquivo auth.service.ts
 
 @Component({
   selector: 'app-login',
@@ -17,10 +18,24 @@ export class LoginComponent {
     senha: ''
 
   };
-
+// Chama o auth.service.ts quando a tela é carregada
+  constructor(private authService: AuthService) {}
 
   fazerLogin() {
-    console.log('Dados prontos para enviar ao Java:', this.credenciais);
+    //Chama o auth.service.ts e o (subscribe) para ficar à espera da resposta do Java
+    this.authService.fazerLogin(this.credenciais).subscribe({
+      next: (resposta) => {
+        // Se a senha estiver certa, o Java devolve o código 200 e entra aqui
+        console.log('Login efetuado com sucesso! Token recebido:', resposta);
+        alert('Bem-vindo ao Wise Smile!');
+      },
+      error: (erro) => {
+        // Se a senha estiver errada, o Java devolve código 400/403 e entra aqui
+        console.error('Falha no acesso', erro);
+        alert('Erro: Utilizador ou senha incorretos.');
+      }
+    });
   }
 
 }
+
