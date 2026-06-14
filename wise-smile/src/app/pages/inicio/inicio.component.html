@@ -1,0 +1,132 @@
+<div class="dashboard-layout">
+    
+    <aside class="sidebar">
+        <div class="logo">
+            <div class="logo-icon">Wise</div>
+        </div>
+        
+        <nav class="sidebar-nav">
+            <a href="#" class="nav-item active">
+                <span class="icon">📊</span> Início
+            </a>
+            <a href="#" class="nav-item">
+                <span class="icon">📅</span> Agenda
+            </a>
+            <a href="#" class="nav-item">
+                <span class="icon">👥</span> Pacientes
+            </a>
+            <a href="#" class="nav-item">
+                <span class="icon">👨‍⚕️</span> Dentistas
+            </a>
+        </nav>
+
+        <div class="sidebar-footer">
+            <a href="#" class="nav-item logout">
+                <span class="icon">🚪</span> Sair
+            </a>
+        </div>
+    </aside>
+
+    <main class="main-content">
+        
+        <header class="content-header">
+            <div>
+                <h1 class="page-title">Visão Geral</h1>
+                <p class="page-subtitle">Acompanhe o movimento da clínica hoje.</p>
+            </div>
+            
+            <div class="quick-actions">
+                <button class="btn-action outline">+ Registrar Dentista</button>
+                <button class="btn-action outline">+ Cadastrar Paciente</button>
+                <button class="btn-action primary">+ Novo Agendamento</button>
+            </div>
+        </header>
+
+        <section class="cards-grid">
+            <div class="stat-card">
+                <div class="card-icon" style="background-color: #e0f2fe;">🦷</div>
+                <div class="card-info">
+                    <p>Consultas Hoje</p>
+                    <h3>12 Agendadas</h3>
+                </div>
+            </div>
+            
+            <div class="stat-card">
+                <div class="card-icon" style="background-color: #fef08a;">👥</div>
+                <div class="card-info">
+                    <p>Total de Pacientes</p>
+                    <h3>1.450 Registrados</h3>
+                </div>
+            </div>
+            
+            <div class="stat-card">
+                <div class="card-icon" style="background-color: #e0e7ff;">👨‍⚕️</div>
+                <div class="card-info">
+                    <p>Dentistas Ativos</p>
+                    <h3>8 Especialistas</h3>
+                </div>
+            </div>
+            
+            <div class="stat-card">
+                <div class="card-icon" style="background-color: #dcfce7;">✅</div>
+                <div class="card-info">
+                    <p>Consultas Finalizadas</p>
+                    <h3>4 Hoje</h3>
+                </div>
+            </div>
+        </section>
+
+        <section class="table-section">
+            <div class="table-header">
+                <h2>Agenda do Dia</h2>
+                <span class="date-badge">Hoje, 24 de Outubro</span>
+            </div>
+            
+            <div class="table-container">
+                <table class="agenda-table">
+                    <thead>
+                        <tr>
+                            <th>Horário</th>
+                            <th>Paciente</th>
+                            <th>Dentista</th>
+                            <th>Status</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="time-col">09:00 - 10:00</td>
+                            <td class="font-medium">Maria Silva</td>
+                            <td>Dr. João Pedro</td>
+                            <td><span class="status-tag scheduled">AGENDADA</span></td>
+                            <td class="actions-col">
+                                <button class="btn-icon" title="Editar">✏️</button>
+                                <button class="btn-icon cancel" title="Cancelar">❌</button>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td class="time-col">10:00 - 11:00</td>
+                            <td class="font-medium">Carlos Andrade</td>
+                            <td>Dra. Ana Carolina</td>
+                            <td><span class="status-tag finished">FINALIZADA</span></td>
+                            <td class="actions-col">
+                                <button class="btn-icon" title="Editar">✏️</button>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="time-col">11:30 - 12:30</td>
+                            <td class="font-medium">Fernanda Lima</td>
+                            <td>Dr. João Pedro</td>
+                            <td><span class="status-tag canceled">CANCELADA</span></td>
+                            <td class="actions-col">
+                                </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+    </main>
+</div>
