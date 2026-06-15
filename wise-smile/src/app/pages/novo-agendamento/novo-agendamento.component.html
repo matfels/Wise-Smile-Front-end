@@ -1,0 +1,57 @@
+<div class="bg-light">
+  <div class="form-wrapper">
+    <div class="form-card">
+      
+      <div class="form-header">
+        <h2>Agendar Nova Consulta</h2>
+        <p>Selecione o paciente, o profissional e defina o horário do atendimento.</p>
+      </div>
+
+      <form (ngSubmit)="salvar()">
+        <div class="form-grid">
+          
+          <div class="input-group full-width">
+            <label for="paciente">Paciente</label>
+            <select id="paciente" name="pacienteId" [(ngModel)]="agendamento.pacienteId" required>
+              <option value="" disabled selected>Selecione o paciente...</option>
+              <option value="1">Maria Silva</option>
+              <option value="2">Carlos Andrade</option>
+              <option value="3">Fernanda Lima</option>
+            </select>
+          </div>
+
+          <div class="input-group full-width">
+            <label for="dentista">Dentista Responsável</label>
+            <select id="dentista" name="dentistaId" [(ngModel)]="agendamento.dentistaId" required>
+              <option value="" disabled selected>Selecione o dentista...</option>
+              <option value="1">Dr. João Pedro (Ortodontia)</option>
+              <option value="2">Dra. Ana Carolina (Endodontia)</option>
+            </select>
+          </div>
+
+          <div class="input-group">
+            <label for="data">Data da Consulta</label>
+            <input type="date" id="data" name="data" [(ngModel)]="agendamento.data" required>
+          </div>
+
+          <div class="input-group">
+            <label for="hora">Horário</label>
+            <input type="time" id="hora" name="hora" [(ngModel)]="agendamento.hora" required>
+          </div>
+
+          <div class="input-group full-width">
+            <label for="observacoes">Observações / Motivo da Consulta</label>
+            <textarea id="observacoes" name="observacoes" [(ngModel)]="agendamento.observacoes" rows="4" placeholder="Ex: Paciente relatou dor no molar inferior direito ou manutenção do aparelho..."></textarea>
+          </div>
+
+        </div>
+
+        <div class="form-actions">
+          <button type="button" class="btn-next" style="background-color: #ef4444;" routerLink="/inicio">Cancelar</button>
+          <button type="submit" class="btn-next">Confirmar Agendamento</button>
+        </div>
+      </form>
+
+    </div>
+  </div>
+</div>
