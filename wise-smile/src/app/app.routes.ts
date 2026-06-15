@@ -3,7 +3,7 @@ import { LoginComponent } from './pages/login/login.component'; // importa tela 
 import { HomeComponent } from './pages/home/home.component'; // importa tela home
 import { InicioComponent } from './pages/inicio/inicio.component'; // importa tela inicio 
 import { CadastroDentistaComponent } from './pages/cadastro-dentista/cadastro-dentista.component'; //importa tela cadastro dentista
-
+import { CadastroPacienteComponent } from './pages/cadastro-paciente/cadastro-paciente.component';
 export const routes: Routes = [
   // Rota raiz (quando não tem nada na URL, carrega a Home)
   { path: '', component: HomeComponent },
@@ -16,8 +16,11 @@ export const routes: Routes = [
 
   // rota inicio
   { path: 'cadastro-dentista', component: CadastroDentistaComponent },
+
+  { path: 'cadastro-paciente', component: CadastroPacienteComponent },
   
   { path: '', redirectTo: '/inicio', pathMatch: 'full' } // redireciona para o inivio caso não tenha o hrl correto.
+
 
 
 
