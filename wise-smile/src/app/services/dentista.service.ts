@@ -12,7 +12,7 @@ export class DentistaService {
 
   constructor(private http: HttpClient) { }
 
-  cadastrar(dentista: any): Observable<any> {
+  cadastrar(dentista: any): Observable<any> { // avisa que é uma ação assincrona.
     // pega o token na memória do navegador
     const token = localStorage.getItem('token');
     
