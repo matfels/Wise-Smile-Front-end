@@ -1,15 +1,16 @@
 /* ==========================================================================
-   ESTRUTURA PRINCIPAL (LAYOUT)
+                        ESTRUTURA PRINCIPAL (LAYOUT )
    ========================================================================== */
 .dashboard-layout {
     display: flex;
     min-height: 100vh;
     background-color: #f3f4f6; /* Fundo cinza bem clarinho para o painel */
     font-family: var(--font-stack);
+
 }
 
 /* ==========================================================================
-   SIDEBAR (Menu Lateral)
+                        SIDEBAR ( Menu Lateral )
    ========================================================================== */
 .sidebar {
     width: 280px;
@@ -21,6 +22,7 @@
     position: sticky;
     top: 0;
     height: 100vh;
+
 }
 .logo-icon {
     width: 64px;
@@ -32,17 +34,21 @@
     align-items: center;
     justify-content: center;
     font-size: 1.25rem;
+
 }
 .sidebar .logo {
     margin-bottom: 2.5rem;
     padding-left: 0.5rem;
 }
 
+
+
 .sidebar-nav {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
     flex: 1; /* Faz o menu ocupar o espaço disponível, empurrando o footer para baixo */
+
 }
 
 .nav-item {
@@ -81,13 +87,17 @@
     color: #dc2626;
 }
 
+
+
+
 /* ==========================================================================
-   ÁREA DE CONTEÚDO PRINCIPAL
+                        ÁREA DE CONTEÚDO PRINCIPAL
    ========================================================================== */
 .main-content {
     flex: 1;
     padding: 2.5rem;
     overflow-y: auto;
+
 }
 
 /* Cabeçalho e Ações Rápidas */
@@ -96,6 +106,7 @@
     justify-content: space-between;
     align-items: flex-end;
     margin-bottom: 2.5rem;
+
 }
 
 .page-title {
@@ -103,16 +114,19 @@
     color: var(--text-dark);
     font-weight: 800;
     margin-bottom: 0.25rem;
+
 }
 
 .page-subtitle {
     color: var(--text-light);
     font-size: 1rem;
+
 }
 
 .quick-actions {
     display: flex;
     gap: 1rem;
+
 }
 
 .btn-action {
@@ -147,14 +161,16 @@
     color: var(--primary);
 }
 
+
 /* ==========================================================================
-   CARTÕES DE RESUMO (Indicadores)
+                        CARTÕES DE RESUMO (Indicadores)
    ========================================================================== */
 .cards-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 1.5rem;
     margin-bottom: 3rem;
+
 }
 
 .stat-card {
@@ -167,6 +183,8 @@
     gap: 1rem;
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02);
     transition: var(--transition);
+
+
 }
 
 .stat-card:hover {
@@ -182,6 +200,7 @@
     align-items: center;
     justify-content: center;
     font-size: 1.5rem;
+
 }
 
 .card-info p {
@@ -189,16 +208,18 @@
     font-size: 0.85rem;
     font-weight: 500;
     margin-bottom: 0.25rem;
+
 }
 
 .card-info h3 {
     color: var(--text-dark);
     font-size: 1.25rem;
     font-weight: 700;
+
 }
 
-/* ==========================================================================
-   TABELA DE AGENDA
+/*  ==========================================================================
+                         TABELA DE AGENDA
    ========================================================================== */
 .table-section {
     background-color: var(--white);
@@ -221,6 +242,7 @@
     color: var(--text-dark);
     font-weight: 700;
 }
+
 
 .date-badge {
     background-color: var(--primary-light);
@@ -251,6 +273,7 @@
     letter-spacing: 0.05em;
 }
 
+
 .agenda-table td {
     padding: 1.25rem 1.5rem;
     border-bottom: 1px solid var(--border-color);
@@ -265,6 +288,8 @@
 .agenda-table tr:hover td {
     background-color: #f9fafb;
 }
+
+
 
 .time-col {
     font-weight: 600;
@@ -320,19 +345,21 @@
 }
 
 /* ==========================================================================
-   RESPONSIVIDADE (Tablets e Celulares)
-   ========================================================================== */
+                    RESPONSIVIDADE (Tablets e Celulares)
+        ========================================================================== */
 @media (max-width: 1024px) {
     .cards-grid {
         grid-template-columns: repeat(2, 1fr);
     }
 }
 
+
 @media (max-width: 768px) {
     .dashboard-layout {
         flex-direction: column;
     }
     
+
 
     .sidebar {
         width: 100%;
@@ -359,5 +386,4 @@
     
     .btn-action {
         width: 100%;
-    }
-}
+    }}

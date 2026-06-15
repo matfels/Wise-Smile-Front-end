@@ -21,7 +21,7 @@
         </nav>
 
         <div class="sidebar-footer">
-            <a href="#" class="nav-item logout">
+            <a href="#" (click)="sair($event)" class="nav-item logout">
                 <span class="icon">🚪</span> Sair
             </a>
         </div>
@@ -36,7 +36,7 @@
             </div>
             
             <div class="quick-actions">
-                <button class="btn-action outline">+ Registrar Dentista</button>
+                <button class="btn-action outline" routerLink="/cadastro-dentista">+ Registrar Dentista</button>
                 <button class="btn-action outline">+ Cadastrar Paciente</button>
                 <button class="btn-action primary">+ Novo Agendamento</button>
             </div>
