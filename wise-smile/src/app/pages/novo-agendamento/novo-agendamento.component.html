@@ -10,28 +10,38 @@
       <form (ngSubmit)="salvar()">
         <div class="form-grid">
           
+<!-- Seleção Dinâmica de Paciente -->
           <div class="input-group full-width">
             <label for="paciente">Paciente</label>
-            <select id="paciente" name="pacienteId" [(ngModel)]="agendamento.pacienteId" required>
+            <select id="paciente" name="idPaciente" [(ngModel)]="agendamento.idPaciente" required>
               <option value="" disabled selected>Selecione o paciente...</option>
-              <option value="1">Maria Silva</option>
-              <option value="2">Carlos Andrade</option>
-              <option value="3">Fernanda Lima</option>
+              
+              <!-- O Angular repete essa linha para cada paciente no banco -->
+              @for (paciente of listaPacientes; track paciente.id) {
+                <option [value]="paciente.id">{{ paciente.nome }} - CPF: {{ paciente.cpf }}</option>
+              }
+              
             </select>
           </div>
 
+          <!-- Seleção Dinâmica de Dentista -->
           <div class="input-group full-width">
             <label for="dentista">Dentista Responsável</label>
-            <select id="dentista" name="dentistaId" [(ngModel)]="agendamento.dentistaId" required>
+            <select id="dentista" name="idDentista" [(ngModel)]="agendamento.idDentista" required>
               <option value="" disabled selected>Selecione o dentista...</option>
-              <option value="1">Dr. João Pedro (Ortodontia)</option>
-              <option value="2">Dra. Ana Carolina (Endodontia)</option>
+              
+              <!-- O Angular repete essa linha para cada dentista no banco -->
+              @for (dentista of listaDentistas; track dentista.id) {
+                <option [value]="dentista.id">{{ dentista.nome }} - CRO: {{ dentista.cro }}</option>
+              }
+
             </select>
           </div>
 
           <div class="input-group">
             <label for="data">Data da Consulta</label>
-            <input type="date" id="data" name="data" [(ngModel)]="agendamento.data" required>
+            <!-- Adicionado o bloqueio de dias anteriores através do [min] -->
+            <input type="date" id="data" name="data" [min]="dataMinima" [(ngModel)]="agendamento.data" required>
           </div>
 
           <div class="input-group">
@@ -40,8 +50,9 @@
           </div>
 
           <div class="input-group full-width">
-            <label for="observacoes">Observações / Motivo da Consulta</label>
-            <textarea id="observacoes" name="observacoes" [(ngModel)]="agendamento.observacoes" rows="4" placeholder="Ex: Paciente relatou dor no molar inferior direito ou manutenção do aparelho..."></textarea>
+            <label for="descricao">Descrição / Motivo da Consulta</label>
+            <!-- Alterado para descricao para espelhar o banco -->
+            <textarea id="descricao" name="descricao" [(ngModel)]="agendamento.descricao" rows="4" placeholder="Ex: Consulta inicial de avaliação..."></textarea>
           </div>
 
         </div>

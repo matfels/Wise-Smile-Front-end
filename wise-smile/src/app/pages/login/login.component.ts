@@ -24,12 +24,13 @@ export class LoginComponent {
   constructor(private authService: AuthService,private router: Router) {}
 
   fazerLogin() {
-    //Chama o auth.service.ts e o (subscribe) para ficar à espera da resposta do Java
+    //Chama o auth.service.ts 
     this.authService.fazerLogin(this.credenciais).subscribe({
       next: (resposta) => {
         // Se a senha estiver certa, o Java devolve o código 200 e entra aqui
         console.log(' Login efetuado com sucesso! Token recebido:' , resposta);
-        localStorage.setItem('token', resposta.token);
+        localStorage.setItem('token', resposta.token); //guarda o token no localStorage
+        localStorage.setItem('idUsuario', resposta.idUsuario); //guarda o IDusuario no localStorage
         this.router.navigate(['/inicio']);
       },
       error: (erro) => {

@@ -21,5 +21,13 @@ export class DentistaService {
     
     //  Dispara o POST para o Java levando os dados e a autorização
     return this.http.post(this.apiUrl, dentista, { headers });
+
+    
+  }
+  listar(): Observable<any[]> {
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    // GET na porta 8081 para puxar todos os dentistas para marcar a consulta
+    return this.http.get<any[]>(this.apiUrl, { headers });
   }
 }

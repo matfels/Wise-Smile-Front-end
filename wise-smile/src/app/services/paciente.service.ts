@@ -24,4 +24,12 @@ export class PacienteService {
     //  Dispara o pacote para o back-end
     return this.http.post(this.apiUrl, paciente, { headers });
   }
+
+  listar(): Observable<any[]>  {
+    const token = localStorage.getItem('token' );
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    
+    // GET na porta 8081 para puxar todos os pacientes para marcar a consulta
+    return this.http.get<any[]>(this.apiUrl, { headers });
+  }
 }
