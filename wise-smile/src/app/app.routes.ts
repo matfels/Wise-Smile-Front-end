@@ -7,8 +7,7 @@ import { CadastroPacienteComponent } from './pages/cadastro-paciente/cadastro-pa
 import { NovoAgendamentoComponent } from './pages/novo-agendamento/novo-agendamento.component';
 import { AgendaComponent } from './pages/agenda/agenda.component';
 import { PacientesComponent } from './pages/pacientes/pacientes.component'; //importa tela pacientes
-
-
+import { DentistasComponent } from './pages/dentistas/dentistas.component';
 
 export const routes: Routes = [
   // Rota raiz (quando não tem nada na URL, carrega a Home)
@@ -31,8 +30,11 @@ export const routes: Routes = [
   
   { path: 'agenda', component: AgendaComponent },
 
-  { path: 'pacientes', component: PacientesComponent }
+  { path: 'pacientes', component: PacientesComponent },
 
+  { path: 'dentistas', component: DentistasComponent },
+ 
+  
 
 
 ];

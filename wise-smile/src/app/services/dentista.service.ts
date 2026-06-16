@@ -35,4 +35,16 @@ export class DentistaService {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
     return this.http.get<any[]>(`${this.apiUrl}/especialidade/${idEspecialidade}`, { headers });
   }
+  deletar(id: number): Observable<any> {
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.delete(`${this.apiUrl}/${id}`, { headers });
+  }
+  ativar(id: number): Observable<any> {
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.put(`${this.apiUrl}/${id}/ativar`, {}, { headers });
+  }
+
+  
 }

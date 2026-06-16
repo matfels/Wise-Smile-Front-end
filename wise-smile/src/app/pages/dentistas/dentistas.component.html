@@ -1,0 +1,62 @@
+<div class="container-page">
+  <div class="header-page">
+    <button routerLink="/inicio" class="btn-voltar">
+      <span>⬅</span> Voltar
+    </button>
+    <h2 class="titulo-page">Gestão de Dentistas</h2>
+  </div>
+
+  <div class="toolbar-page">
+    <label for="filtro">Filtrar por Status:</label>
+    <select id="filtro" [(ngModel)]="filtroStatus" class="select-filtro">
+      <option value="TODOS">Todos os Dentistas</option>
+      <option value="ATIVOS">Apenas Ativos</option>
+      <option value="INATIVOS">Apenas Inativos</option>
+    </select>
+  </div>
+
+  <table class="table-custom">
+    <thead>
+      <tr>
+        <th>Nome</th>
+        <th>CRO</th>
+        <th>E-mail</th>
+        <th>Status</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (dentista of dentistasFiltrados; track dentista.id) {
+        <tr>
+          <td style="font-weight: 500; color: #0f172a;">{{ dentista.nome }}</td>
+          <td>{{ dentista.cro || 'N/A' }}</td>
+          <td>{{ dentista.email }}</td>
+          
+          <td>
+            <span [class]="dentista.ativo ? 'badge-ativo' : 'badge-inativo'">
+              {{ dentista.ativo ? 'ATIVO' : 'INATIVO' }}
+            </span>
+          </td>
+
+          <td>
+            @if (dentista.ativo) {
+              <button class="btn-excluir" (click)="excluir(dentista.id, dentista.nome)">
+                Inativar
+              </button>
+            } @else {
+              <button class="btn-ativar" (click)="ativar(dentista.id, dentista.nome)">
+                Ativar
+              </button>
+            }
+          </td>
+        </tr>
+      }
+      
+      @if (dentistasFiltrados.length === 0) {
+        <tr>
+          <td colspan="5" style="text-align: center; padding: 2rem;">Nenhum dentista encontrado.</td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>
