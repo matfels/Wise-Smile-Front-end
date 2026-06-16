@@ -1,150 +1,124 @@
-:host {
-  display: block;
-  background-color: var(--primary-light);
-  min-height: 100vh;
-  padding: 2rem 1rem;
-}
-/* Container Principal */
-.container-agenda {
-  max-width: 1200px;
-  margin: 2rem auto;
+.container-page {
   padding: 2rem;
-  background-color: #ffffff;
-  border-radius: 12px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
-  font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-}
-.header-agenda-title{
-    color: #5a5a5a;
-}
-/* -------------------------------------
-   CABEÇALHO E BOTÃO DE VOLTAR
--------------------------------------- */
-.header-agenda {
-  display: flex;
-  align-items: center;
-  gap: 1.5rem;
-  margin-bottom: 1.5rem;
-  border-bottom: 2px solid #e2e8f0; /* A linha agora pega a tela toda */
-  padding-bottom: 1rem;
+  background-color: #ffd90025; 
+  min-height: 100vh;
 }
 
-.titulo-agenda {
-  color: #1e293b;
-  font-size: 1.75rem;
-  font-weight: 600;
-  margin: 0; /* Remove a margem para alinhar perfeitamente com o botão */
+
+.header-page {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
 }
 
 .btn-voltar {
-  background-color: #f8fafc;
-  color: #475569;
+  padding: 0.5rem 1rem;
+  background: white;
   border: 1px solid #cbd5e1;
-  padding: 0.5rem 1.2rem;
-  border-radius: 8px;
-  font-size: 0.9rem;
-  font-weight: 600;
+  border-radius: 6px;
   cursor: pointer;
+  font-weight: 500;
+}
+
+.titulo-page {
+  color: #1e293b;
+  font-size: 1.5rem;
+  margin: 0;
+}
+
+/* Barra de Filtros (Onde a mágica acontece) */
+.multi-filtros {
   display: flex;
-  align-items: center;
+  gap: 1.5rem;
+  background-color: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  align-items: flex-end;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.filtro-grupo {
+  display: flex;
+  flex-direction: column;
   gap: 0.5rem;
-  transition: all 0.2s ease;
-  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+  flex: 1;
 }
 
-.btn-voltar:hover {
-  background-color: #e2e8f0;
-  color: #0f172a;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+.filtro-grupo label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #475569;
 }
 
-/* Tabela */
-.table-agenda {
+.input-filtro, .select-filtro {
+  padding: 0.6rem 1rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  outline: none;
+  background-color: #fff;
+  color: #334155;
+}
+
+.input-filtro:focus, .select-filtro:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+/* Tabela Bonita */
+.table-custom {
   width: 100%;
   border-collapse: collapse;
-  text-align: left;
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
 }
 
-.table-agenda th, 
-.table-agenda td {
+.table-custom th {
+  background-color: #f1f5f9;
+  padding: 1rem;
+  text-align: left;
+  font-size: 0.875rem;
+  color: #475569;
+  font-weight: 600;
+}
+
+.table-custom td {
   padding: 1rem;
   border-bottom: 1px solid #e2e8f0;
-  color: #475569;
-  vertical-align: middle;
+  color: #334155;
 }
 
-/* Cabeçalho da Tabela */
-.table-agenda th {
-  background-color: #f8fafc;
-  color: #0f172a;
-  font-weight: 600;
-  text-transform: uppercase;
-  font-size: 0.85rem;
-  letter-spacing: 0.05em;
-}
-
-/* Efeito Hover nas Linhas */
-.table-agenda tbody tr {
-  transition: background-color 0.2s ease;
-}
-
-.table-agenda tbody tr:hover {
-  background-color: #f1f5f9;
-}
-
-/* -------------------------------------
-   BADGES (PÍLULAS) DE STATUS 
--------------------------------------- */
-.status-agendada, 
-.status-cancelada {
-  padding: 0.35rem 0.75rem;
-  border-radius: 9999px; /* Deixa arredondado igual pílula */
-  font-size: 0.80rem;
+/* Pílulas de Status (Badges) */
+.badge {
+  padding: 0.4rem 0.8rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
   font-weight: 700;
   display: inline-block;
-  text-align: center;
 }
 
-.status-agendada {
-  background-color: #dcfce7; /* Fundo verde claro */
-  color: #166534; /* Texto verde escuro */
-  border: 1px solid #bbf7d0;
-}
+.badge-agendada { background: #e0f2fe; color: #0284c7; }
+.badge-finalizada { background: #dcfce7; color: #16a34a; }
+.badge-cancelada { background: #fee2e2; color: #dc2626; }
 
-.status-cancelada {
-  background-color: #fee2e2; /* Fundo vermelho claro */
-  color: #991b1b; /* Texto vermelho escuro */
-  border: 1px solid #fecaca;
-}
-
-/* -------------------------------------
-   BOTÕES E TEXTOS AUXILIARES
--------------------------------------- */
-.btn-cancelar {
-  background-color: #ef4444;
-  color: white;
-  border: none;
-  padding: 0.5rem 1rem;
+/* Botões da Tabela */
+.btn-excluir {
+  background: white;
+  color: #dc2626;
+  border: 1px solid #fca5a5;
+  padding: 0.4rem 0.8rem;
   border-radius: 6px;
-  font-size: 0.875rem;
-  font-weight: 500;
   cursor: pointer;
-  transition: background-color 0.2s ease, transform 0.1s ease;
+  font-size: 0.875rem;
+  font-weight: 600;
+  transition: all 0.2s ease;
 }
 
-.btn-cancelar:hover {
-  background-color: #dc2626;
-}
-
-.btn-cancelar:active {
-  transform: scale(0.98);
-}
-
-/* Motivo do Cancelamento */
-small {
-  color: #64748b;
-  font-size: 0.85rem;
-  font-style: italic;
-  display: inline-block;
-  margin-top: 0.25rem;
+.btn-excluir:hover {
+  background: #fee2e2;
 }

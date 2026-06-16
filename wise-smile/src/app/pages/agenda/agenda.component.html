@@ -1,52 +1,86 @@
-<div class="container-agenda">
-    <div class="header-agenda">
-        <button routerLink="/inicio" class="btn-voltar">
-            <span>⬅</span> Voltar
-        </button>
-        <h2 class="header-agenda-title">Agenda de Consultas</h2>
+<div class="container-page">
+  <div class="header-page">
+    <button routerLink="/inicio" class="btn-voltar">
+      <span>⬅</span> Voltar
+    </button>
+    <h2 class="titulo-page">Agenda de Consultas</h2>
+  </div>
+
+  <!-- Barra de Filtros -->
+  <div class="toolbar-page multi-filtros">
+    
+    <div class="filtro-grupo">
+      <label>Buscar Paciente:</label>
+      <input type="text" placeholder="Nome do paciente..." [(ngModel)]="filtroPaciente" class="input-filtro">
     </div>
 
-    <table class="table-agenda">
-        <thead>
-            <tr>
-                <th>Data e Hora</th>
-                <th>Paciente</th>
-                <th>Dentista</th>
-                <th>Status</th>
-                <th>Ação</th>
-            </tr>
-        </thead>
-        <tbody>
+    <div class="filtro-grupo">
+      <label>Buscar Dentista:</label>
+      <input type="text" placeholder="Nome do dentista..." [(ngModel)]="filtroDentista" class="input-filtro">
+    </div>
 
-            @for (consulta of listaConsultas; track consulta.id) {
-            <tr>
-                <td>{{ consulta.dataInicio | date:'dd/MM/yyyy HH:mm' }}</td>
-                <td>{{ consulta.paciente.nome }}</td>
-                <td>{{ consulta.dentista.nome }}</td>
+    <div class="filtro-grupo">
+      <label>Status:</label>
+      <select [(ngModel)]="filtroStatus" class="select-filtro">
+        <option value="TODOS">Todos</option>
+        <option value="AGENDADA">Agendada</option>
+        <option value="FINALIZADA">Finalizada</option>
+        <option value="CANCELADA">Cancelada</option>
+      </select>
+    </div>
 
-                <td>
-                    <span [class]="consulta.status === 'CANCELADA' ? 'status-cancelada' : 'status-agendada'">
-                        {{ consulta.status }}
-                    </span>
-                </td>
+  </div>
 
+  <!-- Tabela de Agendamentos -->
+  <table class="table-custom">
+    <thead>
+      <tr>
+        <th>ID da Consulta</th>
+        <th>Data</th>
+        <th>Paciente</th>
+        <th>Dentista</th>
+        <th>Status</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Aqui o Angular repete as linhas baseado na lista já filtrada -->
+      @for (consulta of consultasFiltradas; track consulta.id) {
+        <tr>
+          <td>{{ consulta.id }}</td>
+          <td style="font-weight: bold; color: #3b82f6;">
+            {{ consulta.dataInicio | date:'dd/MM/yyyy HH:mm' }}
+          </td>
+          <td style="font-weight: 500; color: #0f172a;">{{ consulta.paciente.nome }}</td>
+          <td>{{ consulta.dentista.nome }}</td>
+          
+          <td>
+            <!-- A cor da pílula muda dependendo da palavra do status -->
+            <span class="badge" 
+                  [ngClass]="{
+                    'badge-agendada': consulta.status === 'AGENDADA',
+                    'badge-finalizada': consulta.status === 'FINALIZADA',
+                    'badge-cancelada': consulta.status === 'CANCELADA'
+                  }">
+              {{ consulta.status }}
+            </span>
+          </td>
 
-                <td>
-                    @if (consulta.status !== 'CANCELADA') {
-                    <button class="btn-cancelar" (click)="cancelar(consulta.id)">Cancelar Consulta</button>
-                    } @else {
-                    <small>Motivo: {{ consulta.motivoCancelamento }}</small>
-                    }
-                </td>
-            </tr>
-            }
+          <td>
+            <!-- Botão de cancelar aciona a função que já estava no seu TS -->
+            <button class="btn-excluir" (click)="cancelar(consulta.id)">
+              Cancelar Consulta
+            </button>
+          </td>
+        </tr>
+      }
 
-
-            @if (listaConsultas.length === 0) {
-            <tr>
-                <td colspan="5" style="text-align: center;">Nenhuma consulta agendada.</td>
-            </tr>
-            }
-        </tbody>
-    </table>
+    
+      @if (consultasFiltradas.length === 0) {
+        <tr>
+          <td colspan="5" style="text-align: center; padding: 2rem;">Nenhuma consulta encontrada com estes filtros.</td>
+        </tr>
+      }
+    </tbody>
+  </table>
 </div>

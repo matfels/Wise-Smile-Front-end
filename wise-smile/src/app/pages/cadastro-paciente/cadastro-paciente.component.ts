@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { RouterLink, Router } from '@angular/router';
+import { RouterLink, Router, } from '@angular/router';
 import { PacienteService } from '../../services/paciente.service'; // Importe o paciente service
 
 @Component({
