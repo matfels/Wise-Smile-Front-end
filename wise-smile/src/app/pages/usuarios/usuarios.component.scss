@@ -1,0 +1,78 @@
+.container-page {
+  padding: 2rem;
+  background-color: var(--primary-light, #ffd90025);
+  min-height: 100vh;
+  font-family: sans-serif;
+}
+
+.header-title {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+
+  h2 { margin: 0; color: #111827; font-size: 1.8rem; }
+}
+
+.btn-voltar {
+  background: white; border: 1px solid #d1d5db; padding: 0.5rem 1rem;
+  border-radius: 6px; color: #374151; cursor: pointer; transition: 0.2s;
+  &:hover { background-color: #f3f4f6; }
+}
+
+.card-table {
+  background-color: #ffffff; padding: 2rem; border-radius: 12px;
+  box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+}
+
+.filter-section {
+  display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;
+  background: #f9fafb; padding: 1rem; border-radius: 8px; border: 1px solid #e5e7eb;
+
+  label { font-weight: 600; color: #374151; }
+  select {
+    padding: 0.5rem; border: 1px solid #d1d5db; border-radius: 6px;
+    outline: none; cursor: pointer;
+  }
+}
+
+table {
+  width: 100%; border-collapse: collapse; text-align: left;
+  
+  th {
+    background-color: #f8fafc; color: #0f172a; padding: 1rem;
+    font-size: 0.85rem; font-weight: 700; border-bottom: 2px solid #e2e8f0;
+  }
+  
+  td {
+    padding: 1rem; border-bottom: 1px solid #f1f5f9; color: #334155; vertical-align: middle;
+  }
+}
+
+.badge {
+  padding: 0.3rem 0.8rem; border-radius: 12px; font-size: 0.75rem; font-weight: bold;
+  &.ativo { background-color: #dcfce7; color: #166534; }
+  &.inativo { background-color: #fee2e2; color: #991b1b; }
+}
+
+.acoes {
+  display: flex; gap: 0.5rem; align-items: center;
+}
+
+.btn-icone {
+  background: transparent; border: 1px solid #e2e8f0; border-radius: 6px;
+  padding: 0.4rem; cursor: pointer; transition: 0.2s;
+  &:hover { background-color: #f1f5f9; }
+}
+
+.btn-inativar {
+  background-color: #ef4444; color: white; border: none; border-radius: 6px;
+  padding: 0.4rem 0.8rem; font-size: 0.85rem; font-weight: bold; cursor: pointer; transition: 0.2s;
+  &:hover { background-color: #dc2626; }
+}
+
+.btn-ativar {
+  background-color: #10b981; color: white; border: none; border-radius: 6px;
+  padding: 0.4rem 0.8rem; font-size: 0.85rem; font-weight: bold; cursor: pointer; transition: 0.2s;
+  &:hover { background-color: #059669; }
+}

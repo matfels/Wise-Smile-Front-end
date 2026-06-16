@@ -1,0 +1,60 @@
+<div class="container-page">
+  <div class="header-title">
+    <button class="btn-voltar" routerLink="/inicio">
+      <strong>&larr; Voltar</strong>
+    </button>
+    <h2>Gestão de Usuários</h2>
+  </div>
+
+  <div class="card-table">
+    <div class="filter-section">
+      <label for="filtro">Filtrar por Status:</label>
+      <select id="filtro" [(ngModel)]="filtroStatus" (change)="filtrar()">
+        <option value="todos">Todos os Usuários</option>
+        <option value="ativos">Somente Ativos</option>
+        <option value="inativos">Somente Inativos</option>
+      </select>
+    </div>
+
+    <div class="table-responsive">
+      <table>
+        <thead>
+          <tr>
+            <th>NOME</th>
+            <th>E-MAIL</th>
+            <th>PERFIL</th>
+            <th>STATUS</th>
+            <th>AÇÕES</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let usuario of usuariosFiltrados">
+            <td><strong>{{ usuario.nome }}</strong></td>
+            <td>{{ usuario.email }}</td>
+            <td>{{ usuario.perfil }}</td>
+            <td>
+              <span class="badge" [ngClass]="usuario.ativo ? 'ativo' : 'inativo'">
+                {{ usuario.ativo ? 'ATIVO' : 'INATIVO' }}
+              </span>
+            </td>
+            <td class="acoes">
+              <button class="btn-icone" routerLink="/cadastro-usuario/{{ usuario.id }}" title="Editar">
+                ✏️
+              </button>
+
+              <button *ngIf="usuario.ativo" class="btn-inativar" (click)="inativarUsuario(usuario.id)">
+                Inativar
+              </button>
+              <button *ngIf="!usuario.ativo" class="btn-ativar" (click)="ativarUsuario(usuario.id)">
+                Ativar
+              </button>
+            </td>
+          </tr>
+          <tr *ngIf="usuariosFiltrados.length === 0">
+            <td colspan="5" style="text-align: center; padding: 2rem;">Nenhum usuário encontrado.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

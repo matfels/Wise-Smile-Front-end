@@ -10,6 +10,7 @@ import { PacientesComponent } from './pages/pacientes/pacientes.component'; //im
 import { DentistasComponent } from './pages/dentistas/dentistas.component';
 import { EspecialidadeComponent } from './pages/especialidade/especialidade.component';
 import { CadastroUsuarioComponent } from './pages/cadastro-usuario/cadastro-usuario.component';
+import { UsuariosComponent } from './pages/usuarios/usuarios.component';
 
 
 
@@ -41,8 +42,11 @@ export const routes: Routes = [
 
   { path: 'especialidade', component: EspecialidadeComponent },
 
-  { path: 'cadastro-usuario', component: CadastroUsuarioComponent }
+  { path: 'usuarios', component: UsuariosComponent },
+
+  { path: 'cadastro-usuario', component: CadastroUsuarioComponent },
  
+  { path: 'cadastro-usuario/:id', component: CadastroUsuarioComponent }
   
 
 

@@ -37,7 +37,11 @@
                         {{ paciente.ativo ? 'ATIVO' : 'INATIVO' }}
                     </span>
                 </td>
+                <td class="acoes">
 
+                    <button class="btn-icone" routerLink="/cadastro-paciente/{{ paciente.id }}" title="Editar">
+                        ✏️
+                    </button>
                 <td>
                     @if (paciente.ativo) {
                     <button class="btn-excluir" (click)="excluir(paciente.id, paciente.nome)">
@@ -48,10 +52,8 @@
                         Ativar
                     </button>
                     }
+
                 </td>
-                <button class="btn-icone" routerLink="/cadastro-paciente/{{ paciente.id }}" title="Editar">
-                ✏️
-                </button>
             </tr>
             }
 

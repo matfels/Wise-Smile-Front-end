@@ -27,38 +27,40 @@
     </thead>
     <tbody>
       @for (dentista of dentistasFiltrados; track dentista.id) {
-        <tr>
-          <td style="font-weight: 500; color: #0f172a;">{{ dentista.nome }}</td>
-          <td>{{ dentista.cro || 'N/A' }}</td>
-          <td>{{ dentista.email }}</td>
-          
-          <td>
-            <span [class]="dentista.ativo ? 'badge-ativo' : 'badge-inativo'">
-              {{ dentista.ativo ? 'ATIVO' : 'INATIVO' }}
-            </span>
-          </td>
+      <tr>
+        <td style="font-weight: 500; color: #0f172a;">{{ dentista.nome }}</td>
+        <td>{{ dentista.cro || 'N/A' }}</td>
+        <td>{{ dentista.email }}</td>
 
-          <td>
-            @if (dentista.ativo) {
-              <button class="btn-excluir" (click)="excluir(dentista.id, dentista.nome)">
-                Inativar
-              </button>
-            } @else {
-              <button class="btn-ativar" (click)="ativar(dentista.id, dentista.nome)">
-                Ativar
-              </button>
-            }
-          </td>
+        <td>
+          <span [class]="dentista.ativo ? 'badge-ativo' : 'badge-inativo'">
+            {{ dentista.ativo ? 'ATIVO' : 'INATIVO' }}
+          </span>
+        </td>
+        <td cass="acoes">
+
           <button class="btn-icone" routerLink="/cadastro-dentista/{{ dentista.id }}" title="Editar">
             ✏️
           </button>
-        </tr>
+        <td>
+          @if (dentista.ativo) {
+          <button class="btn-excluir" (click)="excluir(dentista.id, dentista.nome)">
+            Inativar
+          </button>
+          } @else {
+          <button class="btn-ativar" (click)="ativar(dentista.id, dentista.nome)">
+            Ativar
+          </button>
+          }
+        </td>
+      </tr>
+
       }
-      
+
       @if (dentistasFiltrados.length === 0) {
-        <tr>
-          <td colspan="5" style="text-align: center; padding: 2rem;">Nenhum dentista encontrado.</td>
-        </tr>
+      <tr>
+        <td colspan="5" style="text-align: center; padding: 2rem;">Nenhum dentista encontrado.</td>
+      </tr>
       }
     </tbody>
   </table>
