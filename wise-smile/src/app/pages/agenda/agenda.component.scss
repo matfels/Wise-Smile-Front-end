@@ -1,0 +1,150 @@
+:host {
+  display: block;
+  background-color: var(--primary-light);
+  min-height: 100vh;
+  padding: 2rem 1rem;
+}
+/* Container Principal */
+.container-agenda {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+.header-agenda-title{
+    color: #5a5a5a;
+}
+/* -------------------------------------
+   CABEÇALHO E BOTÃO DE VOLTAR
+-------------------------------------- */
+.header-agenda {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 2px solid #e2e8f0; /* A linha agora pega a tela toda */
+  padding-bottom: 1rem;
+}
+
+.titulo-agenda {
+  color: #1e293b;
+  font-size: 1.75rem;
+  font-weight: 600;
+  margin: 0; /* Remove a margem para alinhar perfeitamente com o botão */
+}
+
+.btn-voltar {
+  background-color: #f8fafc;
+  color: #475569;
+  border: 1px solid #cbd5e1;
+  padding: 0.5rem 1.2rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.2s ease;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+}
+
+.btn-voltar:hover {
+  background-color: #e2e8f0;
+  color: #0f172a;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Tabela */
+.table-agenda {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.table-agenda th, 
+.table-agenda td {
+  padding: 1rem;
+  border-bottom: 1px solid #e2e8f0;
+  color: #475569;
+  vertical-align: middle;
+}
+
+/* Cabeçalho da Tabela */
+.table-agenda th {
+  background-color: #f8fafc;
+  color: #0f172a;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+}
+
+/* Efeito Hover nas Linhas */
+.table-agenda tbody tr {
+  transition: background-color 0.2s ease;
+}
+
+.table-agenda tbody tr:hover {
+  background-color: #f1f5f9;
+}
+
+/* -------------------------------------
+   BADGES (PÍLULAS) DE STATUS 
+-------------------------------------- */
+.status-agendada, 
+.status-cancelada {
+  padding: 0.35rem 0.75rem;
+  border-radius: 9999px; /* Deixa arredondado igual pílula */
+  font-size: 0.80rem;
+  font-weight: 700;
+  display: inline-block;
+  text-align: center;
+}
+
+.status-agendada {
+  background-color: #dcfce7; /* Fundo verde claro */
+  color: #166534; /* Texto verde escuro */
+  border: 1px solid #bbf7d0;
+}
+
+.status-cancelada {
+  background-color: #fee2e2; /* Fundo vermelho claro */
+  color: #991b1b; /* Texto vermelho escuro */
+  border: 1px solid #fecaca;
+}
+
+/* -------------------------------------
+   BOTÕES E TEXTOS AUXILIARES
+-------------------------------------- */
+.btn-cancelar {
+  background-color: #ef4444;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.btn-cancelar:hover {
+  background-color: #dc2626;
+}
+
+.btn-cancelar:active {
+  transform: scale(0.98);
+}
+
+/* Motivo do Cancelamento */
+small {
+  color: #64748b;
+  font-size: 0.85rem;
+  font-style: italic;
+  display: inline-block;
+  margin-top: 0.25rem;
+}

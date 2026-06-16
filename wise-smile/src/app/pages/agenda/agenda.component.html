@@ -1,0 +1,52 @@
+<div class="container-agenda">
+    <div class="header-agenda">
+        <button routerLink="/inicio" class="btn-voltar">
+            <span>⬅</span> Voltar
+        </button>
+        <h2 class="header-agenda-title">Agenda de Consultas</h2>
+    </div>
+
+    <table class="table-agenda">
+        <thead>
+            <tr>
+                <th>Data e Hora</th>
+                <th>Paciente</th>
+                <th>Dentista</th>
+                <th>Status</th>
+                <th>Ação</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @for (consulta of listaConsultas; track consulta.id) {
+            <tr>
+                <td>{{ consulta.dataInicio | date:'dd/MM/yyyy HH:mm' }}</td>
+                <td>{{ consulta.paciente.nome }}</td>
+                <td>{{ consulta.dentista.nome }}</td>
+
+                <td>
+                    <span [class]="consulta.status === 'CANCELADA' ? 'status-cancelada' : 'status-agendada'">
+                        {{ consulta.status }}
+                    </span>
+                </td>
+
+
+                <td>
+                    @if (consulta.status !== 'CANCELADA') {
+                    <button class="btn-cancelar" (click)="cancelar(consulta.id)">Cancelar Consulta</button>
+                    } @else {
+                    <small>Motivo: {{ consulta.motivoCancelamento }}</small>
+                    }
+                </td>
+            </tr>
+            }
+
+
+            @if (listaConsultas.length === 0) {
+            <tr>
+                <td colspan="5" style="text-align: center;">Nenhuma consulta agendada.</td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>
