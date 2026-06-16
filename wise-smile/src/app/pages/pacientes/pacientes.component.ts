@@ -10,12 +10,11 @@ import { FormsModule } from '@angular/forms';
   imports: [CommonModule, RouterLink, FormsModule],
   templateUrl: './pacientes.component.html',
   styleUrl: './pacientes.component.scss'
-
 })
 export class PacientesComponent implements OnInit {
   
   listaPacientes: any[] = [];
-  filtroStatus: string = 'TODOS'; // Começa mostrando todos
+  filtroStatus: string = 'TODOS';
 
   constructor(private pacienteService: PacienteService) {}
 
@@ -24,41 +23,54 @@ export class PacientesComponent implements OnInit {
   }
 
   carregarPacientes() {
-    this.pacienteService.listar().subscribe( {
+    this.pacienteService.listar().subscribe({
       next: (dados) => {
         this.listaPacientes = dados;
       },
       error: (err) => console.error('Erro ao carregar pacientes', err)
     });
   }
-  // função ´para o filtro. O HTML le os dados daqui.
+
   get pacientesFiltrados() {
     if (this.filtroStatus === 'ATIVOS') {
       return this.listaPacientes.filter(p => p.ativo === true);
     } else if (this.filtroStatus === 'INATIVOS') {
       return this.listaPacientes.filter(p => p.ativo === false);
     }
-    return this.listaPacientes; // Se for todos
+    return this.listaPacientes; 
   }
 
-
   excluir(id: number, nome: string) {
-    const confirmacao = confirm(`ATENÇÃO: Tem certeza que deseja excluir o paciente ${nome}?`);
+    const confirmacao = confirm(`ATENÇÃO: Tem certeza que deseja inativar o paciente ${nome}?`);
 
     if (confirmacao) {
-      this.pacienteService.deletar(id).subscribe(
-        {
+      this.pacienteService.deletar(id).subscribe({
         next: () => {
-          alert('Paciente excluído com sucesso!');
-          this.carregarPacientes(); // Atualiza a tabela na mesma hora
+          alert('Paciente inativado com sucesso!');
+          this.carregarPacientes(); 
         },
         error: (err) => {
-          console.error('Erro ao excluir', err);
-          alert('Falha ao excluir o paciente.');
+          console.error('Erro ao inativar', err);
+          alert('Falha ao inativar o paciente.');
         }
       });
     }
+  }
+  // Ativar paciente
+  ativar(id: number, nome: string) {
+    const confirmacao = confirm(`Deseja reativar o cadastro do paciente ${nome}?`);
 
-
+    if (confirmacao) {
+      this.pacienteService.ativar(id).subscribe({
+        next: () => {
+          alert('Paciente reativado com sucesso!');
+          this.carregarPacientes(); // Atualiza a tabela dinamicamente
+        },
+        error: (err) => {
+          console.error('Erro ao reativar', err);
+          alert('Falha ao reativar o paciente.');
+        }
+      });
+    }
   }
 }

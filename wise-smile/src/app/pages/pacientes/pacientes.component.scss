@@ -4,7 +4,6 @@
   min-height: 100vh;
   padding: 2rem 1rem;
 }
-
 .container-page {
   max-width: 1200px;
   margin: 0 auto;
@@ -48,6 +47,37 @@
 
 .btn-voltar:hover { background-color: #e2e8f0; color: #0f172a; }
 
+/* Barra de Filtro */
+.toolbar-page {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  background-color: #f8fafc;
+  padding: 1rem;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+}
+
+.toolbar-page label {
+  font-weight: 600;
+  color: #475569;
+  font-size: 0.9rem;
+}
+
+.select-filtro {
+  padding: 0.5rem 1rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  background-color: white;
+  color: #1e293b;
+  font-size: 0.9rem;
+  outline: none;
+  min-width: 200px;
+  cursor: pointer;
+}
+
+/* Tabela */
 .table-custom {
   width: 100%;
   border-collapse: collapse;
@@ -72,6 +102,7 @@
 
 .table-custom tbody tr:hover { background-color: #f1f5f9; }
 
+/* Botões da Tabela */
 .btn-excluir {
   background-color: #ef4444;
   color: white;
@@ -86,4 +117,40 @@
 
 .btn-excluir:hover { background-color: #dc2626; }
 
-.btn-excluir:active { transform: scale(0.98); }
+/* Badges de Status */
+.badge-ativo, 
+.badge-inativo {
+  padding: 0.35rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.80rem;
+  font-weight: 700;
+  display: inline-block;
+  text-align: center;
+}
+
+.badge-ativo {
+  background-color: #dcfce7;
+  color: #166534;
+  border: 1px solid #bbf7d0;
+}
+
+.badge-inativo {
+  background-color: #fee2e2;
+  color: #991b1b;
+  border: 1px solid #fecaca;
+}
+.btn-ativar {
+  background-color: #10b981; /* Verde moderno */
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-ativar:hover {
+  background-color: #059669; /* Verde um pouco mais escuro no hover */
+}

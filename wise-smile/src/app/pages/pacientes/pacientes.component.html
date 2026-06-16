@@ -1,64 +1,63 @@
 <div class="container-page">
-  <div class="header-page">
-    <button routerLink="/inicio" class="btn-voltar">
-      <span>⬅</span> Voltar
-    </button>
-    <h2 class="titulo-page">Gestão de Pacientes</h2>
-  </div>
+    <div class="header-page">
+        <button routerLink="/inicio" class="btn-voltar">
+            <span>⬅</span> Voltar
+        </button>
+        <h2 class="titulo-page">Gestão de Pacientes</h2>
+    </div>
 
-  
-  <div class="toolbar-page">
-    <label for="filtro">Filtrar por Status:</label>
-    <select id="filtro" [(ngModel)]="filtroStatus" class="select-filtro">
-      <option value="TODOS">Todos os Pacientes</option>
-      <option value="ATIVOS">Apenas Ativos</option>
-      <option value="INATIVOS">Apenas Inativos</option>
-    </select>
-  </div>
+    <div class="toolbar-page">
+        <label for="filtro">Filtrar por Status:</label>
+        <select id="filtro" [(ngModel)]="filtroStatus" class="select-filtro">
+            <option value="TODOS">Todos os Pacientes</option>
+            <option value="ATIVOS">Apenas Ativos</option>
+            <option value="INATIVOS">Apenas Inativos</option>
+        </select>
+    </div>
 
-  <table class="table-custom">
-    <thead>
-      <tr>
-        <th>Nome</th>
-        <th>CPF</th>
-        <th>E-mail</th>
-        <th>Status</th>
-        <th>Ações</th>
-      </tr>
-    </thead>
-    <tbody>
-      @for (paciente of pacientesFiltrados; track paciente.id)
-       {
-        <tr>
-          <td style="font-weight: 500; color: #0f172a;">{{ paciente.nome }}</td>
-          <td>{{ paciente.cpf }}</td>
-          <td>{{ paciente.email }}</td>
-          
-          <td>
-            <span [class]="paciente.ativo ? 'badge-ativo' : 'badge-inativo'">
-              {{ paciente.ativo ? 'ATIVO' : 'INATIVO' }}
-            </span>
-          </td>
+    <table class="table-custom">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>CPF</th>
+                <th>E-mail</th>
+                <th>Status</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (paciente of pacientesFiltrados; track paciente.id) {
+            <tr>
+                <td style="font-weight: 500; color: #0f172a;">{{ paciente.nome }}</td>
+                <td>{{ paciente.cpf }}</td>
+                <td>{{ paciente.email }}</td>
 
-          <td>
-            @if (paciente.ativo) {
-              <button class="btn-excluir" (click)="excluir(paciente.id, paciente.nome)">
-                Inativar
-              </button>
-            } @else {
-               <small style="color: #94a3b8; font-style: italic;">Desativado</small>
+                <td>
+                    <span [class]="paciente.ativo ? 'badge-ativo' : 'badge-inativo'">
+                        {{ paciente.ativo ? 'ATIVO' : 'INATIVO' }}
+                    </span>
+                </td>
+
+                <td>
+                    @if (paciente.ativo) {
+                    <button class="btn-excluir" (click)="excluir(paciente.id, paciente.nome)">
+                        Inativar
+                    </button>
+                    } @else {
+                    <button class="btn-ativar" (click)="ativar(paciente.id, paciente.nome)">
+                        Ativar
+                    </button>
+                    }
+                </td>
+            </tr>
             }
-          </td>
-        </tr>
-      }
 
-      
-      @if (pacientesFiltrados.length === 0) {
-      
-        <tr>
-          <td colspan="5" style="text-align: center; padding: 2rem;">Nenhum paciente encontrado para este filtro.</td>
-        </tr>
-      }
-    </tbody>
-  </table>
+            @if (pacientesFiltrados.length === 0) {
+            <tr>
+                <td colspan="5" style="text-align: center; padding: 2rem;">Nenhum paciente encontrado para este filtro.
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
 </div>
