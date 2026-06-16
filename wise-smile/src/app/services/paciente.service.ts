@@ -10,6 +10,7 @@ export class PacienteService {
   // Rota no Spring Boot para PacientesController.java
   private apiUrl = 'http://localhost:8081/pacientes'; 
 
+
   constructor(private http: HttpClient) { }
 
   
@@ -31,5 +32,13 @@ export class PacienteService {
     
     // GET na porta 8081 para puxar todos os pacientes para marcar a consulta
     return this.http.get<any[]>(this.apiUrl, { headers });
+
+    
+  }
+
+  deletar(id: number): Observable<any> {
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.delete(`${this.apiUrl}/${id}`, { headers });
   }
 }

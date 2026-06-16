@@ -1,0 +1,89 @@
+:host {
+  display: block;
+  background-color: var(--primary-light);
+  min-height: 100vh;
+  padding: 2rem 1rem;
+}
+
+.container-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+.header-page {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 2px solid #e2e8f0;
+  padding-bottom: 1rem;
+}
+
+.titulo-page {
+  color: #1e293b;
+  font-size: 1.75rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.btn-voltar {
+  background-color: #f8fafc;
+  color: #475569;
+  border: 1px solid #cbd5e1;
+  padding: 0.5rem 1.2rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.2s ease;
+}
+
+.btn-voltar:hover { background-color: #e2e8f0; color: #0f172a; }
+
+.table-custom {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.table-custom th, .table-custom td {
+  padding: 1rem;
+  border-bottom: 1px solid #e2e8f0;
+  color: #475569;
+  vertical-align: middle;
+}
+
+.table-custom th {
+  background-color: #f8fafc;
+  color: #0f172a;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+}
+
+.table-custom tbody tr:hover { background-color: #f1f5f9; }
+
+.btn-excluir {
+  background-color: #ef4444;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-excluir:hover { background-color: #dc2626; }
+
+.btn-excluir:active { transform: scale(0.98); }
