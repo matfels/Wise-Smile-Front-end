@@ -46,5 +46,19 @@ export class DentistaService {
     return this.http.put(`${this.apiUrl}/${id}/ativar`, {}, { headers });
   }
 
+  // Busca um único dentista pelo ID
+  buscarPorId(id: number): Observable<any> {
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.get(`${this.apiUrl}/${id}`, { headers });
+  }
+
+  // Atualiza os dados do dentista
+  atualizar(id: number, dentista: any): Observable<any> {
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.put(`${this.apiUrl}/${id}`, dentista, { headers });
+  }
+
   
 }

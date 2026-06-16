@@ -43,9 +43,27 @@ export class PacienteService {
   }
 
   
+  
   ativar(id: number): Observable<any> {
   const token = localStorage.getItem('token');
   const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
   return this.http.put(`${this.apiUrl}/${id}/ativar`, {}, { headers });
 }
+
+
+  //  método para buscar um único paciente pelo ID (usado na edição)
+  buscarPorId(id: number): Observable<any> {
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.get(`${this.apiUrl}/${id}`, { headers });
+  }
+
+  //método  atualizar os dados do paciente 
+  atualizar(id: number, paciente: any): Observable<any> {
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.put(`${this.apiUrl}/${id}`, paciente, { headers });
+  
+  
+  }
 }

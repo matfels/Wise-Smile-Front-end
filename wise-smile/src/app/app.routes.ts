@@ -10,6 +10,7 @@ import { PacientesComponent } from './pages/pacientes/pacientes.component'; //im
 import { DentistasComponent } from './pages/dentistas/dentistas.component';
 import { EspecialidadeComponent } from './pages/especialidade/especialidade.component';
 
+
 export const routes: Routes = [
   // Rota raiz (quando não tem nada na URL, carrega a Home)
   { path: '', component: HomeComponent },
@@ -20,19 +21,21 @@ export const routes: Routes = [
   // rota inicio
   { path: 'inicio', component: InicioComponent },
 
-  // rota inicio
   { path: 'cadastro-dentista', component: CadastroDentistaComponent },
+
+  { path: 'cadastro-dentista/:id', component: CadastroDentistaComponent },
 
   { path: 'cadastro-paciente', component: CadastroPacienteComponent },
   
   { path: 'novo-agendamento', component: NovoAgendamentoComponent },
 
-  
   { path: 'agenda', component: AgendaComponent },
 
   { path: 'pacientes', component: PacientesComponent },
 
   { path: 'dentistas', component: DentistasComponent },
+
+  { path: 'cadastro-paciente/:id', component: CadastroPacienteComponent },
 
   { path: 'especialidade', component: EspecialidadeComponent },
 
