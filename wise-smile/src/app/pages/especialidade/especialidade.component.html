@@ -1,0 +1,60 @@
+<div class="container-page">
+  <div class="header-page">
+    <button routerLink="/inicio" class="btn-voltar">
+      <span>⬅</span> Voltar
+    </button>
+    <h2 class="titulo-page">Gestão de Especialidades</h2>
+  </div>
+
+  <div class="toolbar-page">
+    <label for="filtro">Filtrar por Status:</label>
+    <select id="filtro" [(ngModel)]="filtroStatus" class="select-filtro">
+      <option value="TODOS">Todas as Especialidades</option>
+      <option value="ATIVOS">Apenas Ativas</option>
+      <option value="INATIVOS">Apenas Inativas</option>
+    </select>
+  </div>
+
+  <table class="table-custom">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nome da Especialidade</th>
+        <th>Status</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (especialidade of especialidadesFiltradas; track especialidade.id) {
+        <tr>
+          <td>{{ especialidade.id }}</td>
+          <td style="font-weight: 500; color: #0f172a;">{{ especialidade.nome }}</td>
+          
+          <td>
+            <span [class]="especialidade.ativo ? 'badge-ativo' : 'badge-inativo'">
+              {{ especialidade.ativo ? 'ATIVA' : 'INATIVA' }}
+            </span>
+          </td>
+
+          <td>
+            @if (especialidade.ativo) {
+              <button class="btn-excluir" (click)="excluir(especialidade.id, especialidade.nome)">
+                Inativar
+              </button>
+            } @else {
+              <button class="btn-ativar" (click)="ativar(especialidade.id, especialidade.nome)">
+                Ativar
+              </button>
+            }
+          </td>
+        </tr>
+      }
+      
+      @if (especialidadesFiltradas.length === 0) {
+        <tr>
+          <td colspan="4" style="text-align: center; padding: 2rem;">Nenhuma especialidade encontrada.</td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>

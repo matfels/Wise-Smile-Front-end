@@ -8,6 +8,7 @@ import { NovoAgendamentoComponent } from './pages/novo-agendamento/novo-agendame
 import { AgendaComponent } from './pages/agenda/agenda.component';
 import { PacientesComponent } from './pages/pacientes/pacientes.component'; //importa tela pacientes
 import { DentistasComponent } from './pages/dentistas/dentistas.component';
+import { EspecialidadeComponent } from './pages/especialidade/especialidade.component';
 
 export const routes: Routes = [
   // Rota raiz (quando não tem nada na URL, carrega a Home)
@@ -26,13 +27,15 @@ export const routes: Routes = [
   
   { path: 'novo-agendamento', component: NovoAgendamentoComponent },
 
-  { path: '', redirectTo: '/inicio', pathMatch: 'full' }, // redireciona para o inivio caso não tenha o hrl correto.
   
   { path: 'agenda', component: AgendaComponent },
 
   { path: 'pacientes', component: PacientesComponent },
 
   { path: 'dentistas', component: DentistasComponent },
+
+  { path: 'especialidade', component: EspecialidadeComponent },
+
  
   
 
