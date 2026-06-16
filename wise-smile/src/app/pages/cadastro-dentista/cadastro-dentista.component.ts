@@ -1,53 +1,72 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core'; 
+import { ActivatedRoute, Router, RouterLink } from '@angular/router'; 
+import { DentistaService } from '../../services/dentista.service';
+import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { RouterLink, Router } from '@angular/router'; // Importe o Router
-import { DentistaService } from '../../services/dentista.service'; // Importe o novo serviço
 
 @Component({
   selector: 'app-cadastro-dentista',
   standalone: true,
-  imports: [FormsModule, RouterLink], // 1. Importa os módulos necessários
+  imports: [CommonModule, FormsModule, RouterLink],
   templateUrl: './cadastro-dentista.component.html',
   styleUrl: './cadastro-dentista.component.scss'
 })
-export class CadastroDentistaComponent {
+export class CadastroDentistaComponent implements OnInit {
 
-  //  igual da Back-end no Java
-  dentista = {
+  tituloPagina: string = 'Novo Dentista';
+  dentistaIdParaEdicao: number | null = null;
+
+  dentista: any = {
     nome: '',
-    email: '',
-    cpf: '',
     cro: '',
-    especialidadeIds: [] as number[] // Array para guardar os IDs das especialidades
+    especialidadeId: '' 
   };
 
-  // Criado Router e o nosso Service
-  constructor(private dentistaService: DentistaService, private router: Router) {}
+  constructor(
+    private dentistaService: DentistaService,
+    private router: Router,
+    private route: ActivatedRoute 
+  ) {}
 
-  //  Função das marcações dos checkboxes especialidades
-  toggleEspecialidade(id: number, event: any) {
-    if (event.target.checked) {
-      // Se marcar, adiciona o ID na lista
-      this.dentista.especialidadeIds.push(id);
-    } else {
-      //Se desmarcou, remove o ID da lista
-      this.dentista.especialidadeIds = this.dentista.especialidadeIds.filter(eId => eId !== id);
+  ngOnInit() {
+    const id = this.route.snapshot.paramMap.get('id');
+    if (id) {
+      this.dentistaIdParaEdicao = Number(id);
+      this.tituloPagina = 'Editar Dentista';
+
+      this.dentistaService.buscarPorId(this.dentistaIdParaEdicao).subscribe({
+        next: (dados) => this.dentista = dados,
+        error: (err) => console.error('Erro ao carregar dentista', err)
+      });
     }
   }
 
-  //Função disparada ao clicar em Salvar
-  salvar() {
-    // Chama o serviço e fica "escutando" a resposta do Java
-    this.dentistaService.cadastrar(this.dentista).subscribe({ // subscribe arugarda o retorno não assincrono
-      next: (resposta) => {
-        alert('Dentista cadastrado com sucesso!');
-        this.router.navigate(['/inicio']); // Joga de volta pro painel principal
-      },
-      error: (erro) => {
-        console.error('Erro ao cadastrar:', erro);
-        alert('Falha ao registrar o dentista. Verifique o console.');
-      }
-    });
+  
+  toggleEspecialidade(param1?: any, param2?: any) {
+      if (typeof param1 === 'number' || typeof param1 === 'string') {
+      this.dentista.especialidadeId = param1;
+    } else if (param2 && (typeof param2 === 'number' || typeof param2 === 'string')) {
+      this.dentista.especialidadeId = param2;
+    }
   }
 
+  salvar()  {
+    if (this.dentistaIdParaEdicao) {
+      this.dentistaService.atualizar(this.dentistaIdParaEdicao, this.dentista).subscribe({
+        next: ()   => {
+          alert('Dentista atualizado com sucesso!');
+          this.router.navigate(['/dentistas']);
+        },
+        error: (err) => alert('Falha ao atualizar dentista.')
+      });  
+    } else {
+      this.dentistaService.cadastrar(this.dentista).subscribe({
+        next: () => { 
+          alert('Dentista cadastrado com sucesso!');
+          this.router.navigate(['/dentistas']);
+        },
+        error: (err) => alert('Falha ao registrar o dentista.')
+      });
+    }
+  }
 }
