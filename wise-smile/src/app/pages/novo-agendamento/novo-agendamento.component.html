@@ -1,68 +1,87 @@
 <div class="bg-light">
-  <div class="form-wrapper">
-    <div class="form-card">
-      
-      <div class="form-header">
-        <h2>Agendar Nova Consulta</h2>
-        <p>Selecione o paciente, o profissional e defina o horário do atendimento.</p>
-      </div>
+    <div class="form-wrapper">
+        <div class="form-card">
 
-      <form (ngSubmit)="salvar()">
-        <div class="form-grid">
-          
-<!-- Seleção Dinâmica de Paciente -->
-          <div class="input-group full-width">
-            <label for="paciente">Paciente</label>
-            <select id="paciente" name="idPaciente" [(ngModel)]="agendamento.idPaciente" required>
-              <option value="" disabled selected>Selecione o paciente...</option>
-              
-              <!-- O Angular repete essa linha para cada paciente no banco -->
-              @for (paciente of listaPacientes; track paciente.id) {
-                <option [value]="paciente.id">{{ paciente.nome }} - CPF: {{ paciente.cpf }}</option>
-              }
-              
-            </select>
-          </div>
+            <div class="form-header">
+                <h2>Agendar Nova Consulta</h2>
+                <p>Selecione o paciente, o profissional e defina o horário do atendimento.</p>
+            </div>
 
-          <!-- Seleção Dinâmica de Dentista -->
-          <div class="input-group full-width">
-            <label for="dentista">Dentista Responsável</label>
-            <select id="dentista" name="idDentista" [(ngModel)]="agendamento.idDentista" required>
-              <option value="" disabled selected>Selecione o dentista...</option>
-              
-              <!-- O Angular repete essa linha para cada dentista no banco -->
-              @for (dentista of listaDentistas; track dentista.id) {
-                <option [value]="dentista.id">{{ dentista.nome }} - CRO: {{ dentista.cro }}</option>
-              }
+            <form (ngSubmit)="salvar()">
+                <div class="form-grid">
 
-            </select>
-          </div>
+                    <!-- Seleção Dinâmica de Paciente -->
+                    <div class="input-group full-width">
+                        <label for="paciente">Paciente</label>
+                        <select id="paciente" name="idPaciente" [(ngModel)]="agendamento.idPaciente" required>
+                            <option value="" disabled selected>Selecione o paciente...</option>
 
-          <div class="input-group">
-            <label for="data">Data da Consulta</label>
-            <!-- Adicionado o bloqueio de dias anteriores através do [min] -->
-            <input type="date" id="data" name="data" [min]="dataMinima" [(ngModel)]="agendamento.data" required>
-          </div>
+                            <!-- O Angular repete essa linha para cada paciente no banco -->
+                            @for (paciente of listaPacientes; track paciente.id) {
+                            <option [value]="paciente.id">{{ paciente.nome }} - CPF: {{ paciente.cpf }}</option>
+                            }
 
-          <div class="input-group">
-            <label for="hora">Horário</label>
-            <input type="time" id="hora" name="hora" [(ngModel)]="agendamento.hora" required>
-          </div>
+                        </select>
+                    </div>
+                    <div class="input-group full-width">
+                        <label for="especialidade">Especialidade Desejada</label>
+                        <select id="especialidade" name="idEspecialidadeSelecionada"
+                            [(ngModel)]="idEspecialidadeSelecionada" (change)="filtrarDentistas()">
+                            <option value="" selected>Todas as Especialidades</option>
 
-          <div class="input-group full-width">
-            <label for="descricao">Descrição / Motivo da Consulta</label>
-            <!-- Alterado para descricao para espelhar o banco -->
-            <textarea id="descricao" name="descricao" [(ngModel)]="agendamento.descricao" rows="4" placeholder="Ex: Consulta inicial de avaliação..."></textarea>
-          </div>
+                            @for (especialidade of listaEspecialidades; track especialidade.id) {
+                            <option [value]="especialidade.id">{{ especialidade.nome }}</option>
+                            }
+
+                        </select>
+                    </div>
+
+                    <div class="input-group full-width">
+                        <label for="dentista">Dentista Responsável</label>
+                        <select id="dentista" name="idDentista" [(ngModel)]="agendamento.idDentista" required
+                            [disabled]="listaDentistasFiltrados.length === 0">
+                            <option value="" disabled selected>Selecione o profissional...</option>
+
+                            @for (dentista of listaDentistasFiltrados; track dentista.id) {
+                            <option [value]="dentista.id">{{ dentista.nome }} - CRO: {{ dentista.cro }}</option>
+                            }
+
+                        </select>
+                        @if (listaDentistasFiltrados.length === 0) {
+                        <small style="color: #ef4444; margin-top: 0.25rem;">Nenhum profissional disponível para esta
+                            especialidade.</small>
+                        }
+                    </div>
+
+
+                    <div class="input-group">
+                        <label for="data">Data da Consulta</label>
+                        <!-- Adicionado o bloqueio de dias anteriores através do [min] -->
+                        <input type="date" id="data" name="data" [min]="dataMinima" [(ngModel)]="agendamento.data"
+                            required>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="hora">Horário</label>
+                        <input type="time" id="hora" name="hora" [(ngModel)]="agendamento.hora" required>
+                    </div>
+
+                    <div class="input-group full-width">
+                        <label for="descricao">Descrição / Motivo da Consulta</label>
+                        <!-- Alterado para descricao para espelhar o banco -->
+                        <textarea id="descricao" name="descricao" [(ngModel)]="agendamento.descricao" rows="4"
+                            placeholder="Ex: Consulta inicial de avaliação..."></textarea>
+                    </div>
+
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" class="btn-next" style="background-color: #ef4444;"
+                        routerLink="/inicio">Cancelar</button>
+                    <button type="submit" class="btn-next">Confirmar Agendamento</button>
+                </div>
+            </form>
 
         </div>
-
-        <div class="form-actions">
-          <button type="button" class="btn-next" style="background-color: #ef4444;" routerLink="/inicio">Cancelar</button>
-          <button type="submit" class="btn-next">Confirmar Agendamento</button>
-        </div>
-      </form>
-
     </div>
-  </div>
 </div>

@@ -30,4 +30,9 @@ export class DentistaService {
     // GET na porta 8081 para puxar todos os dentistas para marcar a consulta
     return this.http.get<any[]>(this.apiUrl, { headers });
   }
+  buscarPorEspecialidade(idEspecialidade: number): Observable<any[]> {
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.get<any[]>(`${this.apiUrl}/especialidade/${idEspecialidade}`, { headers });
+  }
 }
