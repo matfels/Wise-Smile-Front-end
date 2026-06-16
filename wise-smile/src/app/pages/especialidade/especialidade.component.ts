@@ -35,21 +35,25 @@ export class EspecialidadeComponent implements OnInit {
     return this.listaEspecialidades; 
   }
 
-  excluir(id: number, nome: string) {
-    if (confirm(`ATENÇÃO: Deseja inativar a especialidade ${nome}?`)) {
+  inativar(id: number) {
+    if (confirm('ATENÇÃO: Deseja inativar esta especialidade?')) {
       this.especialidadeService.deletar(id).subscribe({
         next: () => { alert('Especialidade inativada!'); this.carregarEspecialidades(); },
-        error: (err) => alert('Falha ao inativar.')
+        error: (err: any) => alert('Falha ao inativar.')
       });
     }
   }
 
-  ativar(id: number, nome: string) {
-    if (confirm(`Deseja reativar a especialidade ${nome}?`)) {
+
+  ativar(id: number) {
+    if (confirm('Deseja reativar esta especialidade?')) {
       this.especialidadeService.ativar(id).subscribe({
         next: () => { alert('Especialidade reativada!'); this.carregarEspecialidades(); },
-        error: (err) => alert('Falha ao reativar.')
+        error: (err: any) => alert('Falha ao reativar.')
       });
     }
   }
+
+
+  
 }

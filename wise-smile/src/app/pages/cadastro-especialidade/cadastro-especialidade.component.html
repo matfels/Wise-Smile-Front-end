@@ -1,0 +1,21 @@
+<div class="container-page">
+  <div class="header-title">
+    <h2>{{ tituloPagina }}</h2>
+  </div>
+
+  <div class="card-form">
+    <form (ngSubmit)="salvar()">
+      
+      <div class="form-group">
+        <label for="nome">NOME DA ESPECIALIDADE</label>
+        <input type="text" id="nome" name="nome" [(ngModel)]="especialidade.nome" required placeholder="Ex: Ortodontia">
+      </div>
+
+      <div class="actions">
+        <button type="button" class="btn-cancelar" routerLink="/especialidade">Cancelar</button>
+        <button type="submit" class="btn-salvar">Salvar Cadastro</button>
+      </div>
+
+    </form>
+  </div>
+</div>

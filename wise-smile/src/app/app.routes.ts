@@ -11,6 +11,7 @@ import { DentistasComponent } from './pages/dentistas/dentistas.component';
 import { EspecialidadeComponent } from './pages/especialidade/especialidade.component';
 import { CadastroUsuarioComponent } from './pages/cadastro-usuario/cadastro-usuario.component';
 import { UsuariosComponent } from './pages/usuarios/usuarios.component';
+import { CadastroEspecialidadeComponent } from './pages/cadastro-especialidade/cadastro-especialidade.component';
 
 
 
@@ -46,8 +47,11 @@ export const routes: Routes = [
 
   { path: 'cadastro-usuario', component: CadastroUsuarioComponent },
  
-  { path: 'cadastro-usuario/:id', component: CadastroUsuarioComponent }
+  { path: 'cadastro-usuario/:id', component: CadastroUsuarioComponent },
   
+  { path: 'cadastro-especialidade', component: CadastroEspecialidadeComponent },
+
+  { path: 'cadastro-especialidade/:id', component: CadastroEspecialidadeComponent },
 
 
 ];

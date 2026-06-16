@@ -36,17 +36,18 @@
             </span>
           </td>
 
-          <td>
-            @if (especialidade.ativo) {
-              <button class="btn-excluir" (click)="excluir(especialidade.id, especialidade.nome)">
+          <td class="acoes">
+              <button class="btn-icone" routerLink="/cadastro-especialidade/{{ especialidade.id }}" title="Editar">
+                ✏️
+              </button>
+
+              <button *ngIf="especialidade.ativo" class="btn-inativar" (click)="inativar(especialidade.id)">
                 Inativar
               </button>
-            } @else {
-              <button class="btn-ativar" (click)="ativar(especialidade.id, especialidade.nome)">
+              <button *ngIf="!especialidade.ativo" class="btn-ativar" (click)="ativar(especialidade.id)">
                 Ativar
               </button>
-            }
-          </td>
+            </td>
         </tr>
       }
       
