@@ -9,6 +9,8 @@ import { AgendaComponent } from './pages/agenda/agenda.component';
 import { PacientesComponent } from './pages/pacientes/pacientes.component'; //importa tela pacientes
 import { DentistasComponent } from './pages/dentistas/dentistas.component';
 import { EspecialidadeComponent } from './pages/especialidade/especialidade.component';
+import { CadastroUsuarioComponent } from './pages/cadastro-usuario/cadastro-usuario.component';
+
 
 
 export const routes: Routes = [
@@ -39,6 +41,7 @@ export const routes: Routes = [
 
   { path: 'especialidade', component: EspecialidadeComponent },
 
+  { path: 'cadastro-usuario', component: CadastroUsuarioComponent }
  
   
 
