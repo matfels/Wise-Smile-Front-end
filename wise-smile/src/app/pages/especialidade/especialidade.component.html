@@ -21,6 +21,7 @@
         <th>ID</th>
         <th>Nome da Especialidade</th>
         <th>Status</th>
+        <th>editar</th>
         <th>Ações</th>
       </tr>
     </thead>
@@ -37,17 +38,22 @@
           </td>
 
           <td class="acoes">
-              <button class="btn-icone" routerLink="/cadastro-especialidade/{{ especialidade.id }}" title="Editar">
-                ✏️
-              </button>
+            
+            <button class="btn-icone" routerLink="/cadastro-especialidade/{{ especialidade.id }}" title="Editar">
+              ✏️
+            </button>
+          </td>
+          <td>
 
-              <button *ngIf="especialidade.ativo" class="btn-inativar" (click)="inativar(especialidade.id)">
-                Inativar
-              </button>
-              <button *ngIf="!especialidade.ativo" class="btn-ativar" (click)="ativar(especialidade.id)">
-                Ativar
-              </button>
+            
+            <button *ngIf="especialidade.ativo" class="btn-inativar" (click)="inativar(especialidade.id)">
+              Inativar
+            </button>
+            <button *ngIf="!especialidade.ativo" class="btn-ativar" (click)="ativar(especialidade.id)">
+              Ativar
+            </button>
             </td>
+            
         </tr>
       }
       

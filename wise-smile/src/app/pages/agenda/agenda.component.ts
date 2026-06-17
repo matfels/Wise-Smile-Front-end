@@ -36,29 +36,21 @@ export class AgendaComponent implements OnInit {
 
   }
 
-  cancelar(idConsulta: number) {
-    // A função prompt abre uma janela nativa do navegador pedindo o texto
-    const motivo = prompt('REGRA DE NEGÓCIO: Qual o motivo do cancelamento? (Obrigatório)');
-
-    // trava se o usuário clicou em Cancelar no prompt ou deixou vazio 
-    if (!motivo || motivo.trim() === '') {
-      alert('Operação abortada: O motivo é obrigatório para cancelar uma consulta!');
-      return;
-
+  cancelarConsulta(id: number) {
+    const motivo = prompt("Por favor, digite o motivo do cancelamento:");
+    
+    if (motivo && motivo.trim() !== "") {
+      // Chama o seu service passando o ID e o motivo como parâmetro de URL
+      this.agendamentoService.cancelarConsulta(id, motivo).subscribe({
+        next: () => {
+          alert("Consulta cancelada com sucesso.");
+          this.carregarConsultas(); // Recarrega a lista
+        },
+        error: (err) => alert("Erro ao cancelar: " + err.error)
+      });
+    } else {
+      alert("O motivo é obrigatório para cancelar a consulta.");
     }
-
-    // Se tem motivo, dispara o pacote para o Java
-    this.agendamentoService.cancelarConsulta(idConsulta, motivo).subscribe({
-      next: () => {
-
-        alert('Consulta cancelada com sucesso!');
-        this.carregarConsultas(); // Atualiza a tabela na tela automaticamente
-      },
-      error: (err) => {
-        console.error('Erro ao cancelar', err);
-        alert('Falha ao cancelar a consulta.');
-      }
-    });
   }
 
   // Lógica inteligente que cruza os três filtros em tempo real

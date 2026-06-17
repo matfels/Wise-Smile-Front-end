@@ -24,6 +24,7 @@
             <th>E-MAIL</th>
             <th>PERFIL</th>
             <th>STATUS</th>
+            <th>EDITAR</th>
             <th>AÇÕES</th>
           </tr>
         </thead>
@@ -41,6 +42,8 @@
               <button class="btn-icone" routerLink="/cadastro-usuario/{{ usuario.id }}" title="Editar">
                 ✏️
               </button>
+            </td>
+            <td>
 
               <button *ngIf="usuario.ativo" class="btn-inativar" (click)="inativarUsuario(usuario.id)">
                 Inativar

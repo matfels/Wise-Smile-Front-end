@@ -122,3 +122,27 @@
 .btn-excluir:hover {
   background: #fee2e2;
 }
+.btn-cancelar {
+    background-color: #dc2626;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.btn-cancelar:hover {
+    background-color: #991b1b;
+}
+
+/* Garante que a tabela não fique esticada demais */
+table {
+    table-layout: fixed; 
+    width: 100%;
+}
+
+/* Coluna de motivos fica compacta e usa tooltip */
+td {
+    word-wrap: break-word;
+}

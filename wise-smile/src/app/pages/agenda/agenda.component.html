@@ -8,7 +8,7 @@
 
   <!-- Barra de Filtros -->
   <div class="toolbar-page multi-filtros">
-    
+
     <div class="filtro-grupo">
       <label>Buscar Paciente:</label>
       <input type="text" placeholder="Nome do paciente..." [(ngModel)]="filtroPaciente" class="input-filtro">
@@ -40,46 +40,54 @@
         <th>Paciente</th>
         <th>Dentista</th>
         <th>Status</th>
+        <th>Motivo</th>
         <th>Ações</th>
+
       </tr>
     </thead>
     <tbody>
       <!-- Aqui o Angular repete as linhas baseado na lista já filtrada -->
       @for (consulta of consultasFiltradas; track consulta.id) {
-        <tr>
-          <td>{{ consulta.id }}</td>
-          <td style="font-weight: bold; color: #3b82f6;">
-            {{ consulta.dataInicio | date:'dd/MM/yyyy HH:mm' }}
-          </td>
-          <td style="font-weight: 500; color: #0f172a;">{{ consulta.paciente.nome }}</td>
-          <td>{{ consulta.dentista.nome }}</td>
-          
-          <td>
-            <!-- A cor da pílula muda dependendo da palavra do status -->
-            <span class="badge" 
-                  [ngClass]="{
+      <tr>
+        <td>{{ consulta.id }}</td>
+        <td style="font-weight: bold; color: #3b82f6;">
+          {{ consulta.dataInicio | date:'dd/MM/yyyy HH:mm' }}
+        </td>
+        <td style="font-weight: 500; color: #0f172a;">{{ consulta.paciente.nome }}</td>
+        <td>{{ consulta.dentista.nome }}</td>
+
+        <td>
+          <!-- A cor da pílula muda dependendo da palavra do status -->
+          <span class="badge" [ngClass]="{
                     'badge-agendada': consulta.status === 'AGENDADA',
                     'badge-finalizada': consulta.status === 'FINALIZADA',
                     'badge-cancelada': consulta.status === 'CANCELADA'
                   }">
-              {{ consulta.status }}
-            </span>
-          </td>
+            {{ consulta.status }}
+          </span>
 
-          <td>
-            <!-- Botão de cancelar aciona a função que já estava no seu TS -->
-            <button class="btn-excluir" (click)="cancelar(consulta.id)">
-              Cancelar Consulta
-            </button>
-          </td>
-        </tr>
+        </td>
+
+        <td>
+          <span *ngIf="consulta.status === 'CANCELADA'" title="{{ consulta.motivoCancelamento }}">
+            {{ consulta.motivoCancelamento }}
+          </span>
+        </td>
+
+        <td>
+          <!-- Botão de cancelar aciona a função que já estava no seu TS -->
+          <button class="btn-excluir" (click)="cancelarConsulta(consulta.id)">
+            Cancelar Consulta
+          </button>
+        </td>
+      </tr>
       }
 
-    
+
       @if (consultasFiltradas.length === 0) {
-        <tr>
-          <td colspan="5" style="text-align: center; padding: 2rem;">Nenhuma consulta encontrada com estes filtros.</td>
-        </tr>
+      <tr>
+        <td colspan="5" style="text-align: center; padding: 2rem;">Nenhuma consulta encontrada com estes filtros.</td>
+      </tr>
       }
     </tbody>
   </table>
