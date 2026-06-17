@@ -1,7 +1,7 @@
 <div class="bg-light">
   <div class="form-wrapper">
     <div class="form-card">
-      
+
       <div class="form-header">
         <h2>Registrar Novo Dentista</h2>
         <p>Preencha os dados abaixo para adicionar um profissional à clínica.</p>
@@ -9,15 +9,17 @@
 
       <form (ngSubmit)="salvar()">
         <div class="form-grid">
-          
+
           <div class="input-group full-width">
             <label for="nome">Nome Completo</label>
-            <input type="text" id="nome" name="nome" [(ngModel)]="dentista.nome" placeholder="Ex: Dr. João Pedro da Silva" required>
+            <input type="text" id="nome" name="nome" [(ngModel)]="dentista.nome"
+              placeholder="Ex: Dr. João Pedro da Silva" required>
           </div>
 
           <div class="input-group full-width">
             <label for="email">E-mail Profissional</label>
-            <input type="email" id="email" name="email" [(ngModel)]="dentista.email" placeholder="joao.pedro@wisesmile.com" required>
+            <input type="email" id="email" name="email" [(ngModel)]="dentista.email"
+              placeholder="joao.pedro@wisesmile.com" required>
           </div>
 
           <div class="input-group">
@@ -31,33 +33,23 @@
           </div>
 
           <div class="input-group full-width">
-            <label>Especialidades (Selecione uma ou mais)</label>
+            <label>ESPECIALIDADES DO DENTISTA(Selecione uma ou mais)</label>
             <div class="checkbox-grid">
-              
-              <label class="checkbox-card">
-                <input type="checkbox" name="especialidade1" value="1" (change)="toggleEspecialidade(1, $event)">
-                <span class="checkbox-content">Ortodontia</span>
-              </label>
+              @for (esp of listaEspecialidades; track esp.id) {
+              <div class="checkbox-item" style="display: flex; align-items: center; gap: 5px;">
 
-              <label class="checkbox-card">
-                <input type="checkbox" name="especialidade2" value="2" (change)="toggleEspecialidade(2, $event)">
-                <span class="checkbox-content">Implantodontia</span>
-              </label>
+                <input type="checkbox" [id]="'esp-' + esp.id" (change)="toggleEspecialidade(esp, $event)"
+                  [checked]="isEspecialidadeSelecionada(esp.id)" style="width: 18px; height: 18px; cursor: pointer;">
 
-              <label class="checkbox-card">
-                <input type="checkbox" name="especialidade3" value="3" (change)="toggleEspecialidade(3, $event)">
-                <span class="checkbox-content">Endodontia</span>
-              </label>
+                <label [for]="'esp-' + esp.id"
+                  style="margin-bottom: 0; text-transform: none; font-weight: 500; cursor: pointer;">
+                  {{ esp.nome }}
+                </label>
 
-              <label class="checkbox-card">
-                <input type="checkbox" name="especialidade4" value="4" (change)="toggleEspecialidade(4, $event)">
-                <span class="checkbox-content">Odontopediatria</span>
-              </label>
+              </div>
+              }
 
-              <label class="checkbox-card">
-                <input type="checkbox" name="especialidade5" value="5" (change)="toggleEspecialidade(5, $event)">
-                <span class="checkbox-content">Clínica Geral</span>
-              </label>
+
 
             </div>
           </div>
@@ -65,7 +57,9 @@
         </div>
 
         <div class="form-actions">
-          <button type="button" class="btn-next" style="background-color: #ef4444;" routerLink="/inicio">Cancelar</button>
+
+          <button type="button" class="btn-next" style="background-color: #ef4444;"
+            routerLink="/inicio">Cancelar</button>
           <button type="submit" class="btn-next">Salvar Cadastro</button>
         </div>
       </form>
