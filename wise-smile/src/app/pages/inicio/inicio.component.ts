@@ -15,7 +15,7 @@ export class InicioComponent implements OnInit {
 
   consultasDoDia: any[] = [];
   dataAtual = new Date(); 
-
+  totalConsultasHoje: number = 0;
   constructor(
     private router: Router,
     private agendamentoService: AgendamentoService 
@@ -46,6 +46,7 @@ carregarAgendaDashboard() {
 
         
         this.consultasDoDia = apenasHoje.slice(0, 5);
+        this.totalConsultasHoje = apenasHoje.length;
       },
       error: (err) => console.error('Erro ao carregar a agenda no dashboard', err)
     });
