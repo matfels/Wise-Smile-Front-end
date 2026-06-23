@@ -36,7 +36,7 @@
         <header class="content-header">
             <div>
                 <h1 class="page-title">Visão Geral</h1>
-                <p class="page-subtitle">Acompanhe o movimento da clínica hoje.</p>
+
             </div>
             
             <div class="quick-actions">
@@ -84,50 +84,47 @@
         <section class="table-section">
             <div class="table-header">
                 <h2>Agenda do Dia</h2>
-                <span class="date-badge">Hoje, 24 de Outubro</span>
-            </div>
+                <span class="date-badge"> {{ dataAtual | date:'dd/MM/yyyy' }}</span>            </div>
             
             <div class="table-container">
                 <table class="agenda-table">
                     <thead>
                         <tr>
+                            <th >Data</th>
                             <th>Horário</th>
                             <th>Paciente</th>
                             <th>Dentista</th>
                             <th>Status</th>
-                            <th>Ações</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td class="time-col">09:00 - 10:00</td>
-                            <td class="font-medium">Maria Silva</td>
-                            <td>Dr. João Pedro</td>
-                            <td><span class="status-tag scheduled">AGENDADA</span></td>
-                            <td class="actions-col">
-                                <button class="btn-icon" title="Editar">✏️</button>
-                                <button class="btn-icon cancel" title="Cancelar">❌</button>
-                            </td>
-                        </tr>
-                        
-                        <tr>
-                            <td class="time-col">10:00 - 11:00</td>
-                            <td class="font-medium">Carlos Andrade</td>
-                            <td>Dra. Ana Carolina</td>
-                            <td><span class="status-tag finished">FINALIZADA</span></td>
-                            <td class="actions-col">
-                                <button class="btn-icon" title="Editar">✏️</button>
-                            </td>
-                        </tr>
 
+                    <tbody>
+                        @for (consulta of consultasDoDia; track consulta.id) {
                         <tr>
-                            <td class="time-col">11:30 - 12:30</td>
-                            <td class="font-medium">Fernanda Lima</td>
-                            <td>Dr. João Pedro</td>
-                            <td><span class="status-tag canceled">CANCELADA</span></td>
-                            <td class="actions-col">
-                                </td>
+                            <td class="date-col">{{ consulta.dataInicio | date:'dd/MM/yyyy' }}</td>
+                            <td class="time-col">{{ consulta.dataInicio | date:'HH:mm' }}</td>
+                            <td class="font-medium">{{ consulta.paciente.nome }}</td>
+                            <td>{{ consulta.dentista.nome }}</td>
+                            <td>
+                                <span class="status-tag" [ngClass]="{
+                                    'scheduled': consulta.status === 'AGENDADA',
+                                    'finished': consulta.status === 'FINALIZADA',
+                                    'canceled': consulta.status === 'CANCELADA'
+                                }">
+                                    {{ consulta.status }}
+                                </span>
+                            </td>
                         </tr>
+                        }
+
+                        @if (consultasDoDia.length === 0) {
+                        <tr>
+                            <td colspan="4" style="text-align: center; padding: 2rem; color: #64748b;">
+                                Nenhuma consulta agendada para apresentar.
+                            </td>
+                        </tr>
+                        }
+                    
                     </tbody>
                 </table>
             </div>
