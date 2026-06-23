@@ -29,9 +29,6 @@ export class EspecialidadeComponent implements OnInit {
     });
   }
 
-  // Um "Getter" atua como se fosse uma variável dinâmica no HTML. 
-  // Toda vez que você muda o 'filtroStatus' na tela, o HTML re-lê isso aqui,
-  // e a lista se atualiza magicamente mostrando apenas os Ativos ou Inativos.
   get especialidadesFiltradas() {
     if (this.filtroStatus === 'ATIVOS') return this.listaEspecialidades.filter(e => e.ativo === true);
     if (this.filtroStatus === 'INATIVOS') return this.listaEspecialidades.filter(e => e.ativo === false);

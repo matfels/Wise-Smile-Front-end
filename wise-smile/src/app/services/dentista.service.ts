@@ -3,23 +3,23 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-// O @Injectable avisa ao Angular que esse serviço é global ('root'). 
-// Qualquer tela pode "chamá-lo" sem precisar criar uma nova instância (Single Pattern).
+// define o serviço como global todas as páginas podem utilizar sem precisar estanciar a classe novamente.
 @Injectable({providedIn: 'root'}) 
 export class DentistaService {
   
-  // A rota principal para os controladores de Dentistas no Spring Boot.
+  // Rota DentistaController.java
   private apiUrl = 'http://localhost:8081/dentistas'; 
 
   constructor(private http: HttpClient) { }
 
-  cadastrar(dentista: any): Observable<any> { 
+  cadastrar(dentista: any): Observable<any> { // avisa que é uma ação assincrona.
+    // pega o token na memória do navegador
     const token = localStorage.getItem('token');
     
-    // Anexa a chave JWT de segurança para provar que o usuário está logado e tem permissão.
+    //Anexa o token no cabeçalho (Header) da requisição
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
     
-    // Dispara o POST enviando o novo dentista.
+    //  Dispara o POST para o Java levando os dados e a autorização
     return this.http.post(this.apiUrl, dentista, { headers });
 
     
@@ -30,8 +30,6 @@ export class DentistaService {
     // GET na porta 8081 para puxar todos os dentistas para marcar a consulta
     return this.http.get<any[]>(this.apiUrl, { headers });
   }
-
-  // Rota especial: Pede pro Java trazer apenas os dentistas que têm uma especialidade específica.
   buscarPorEspecialidade(idEspecialidade: number): Observable<any[]> {
     const token = localStorage.getItem('token');
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);

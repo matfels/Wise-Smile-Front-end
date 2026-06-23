@@ -16,14 +16,14 @@ import { PacienteService } from '../../services/paciente.service';
 })
 export class NovoAgendamentoComponent implements OnInit {
 
-  // Variáveis para guardar os dados vindos do Back-end, preenchendo os "Selects" (caixas de seleção) na tela.
+  //Variaveis de lista para receber as informações "pacientes e dentistas"
   listaPacientes: any[] = [];
   listaEspecialidades: any[] = [];
-  // Dividimos os dentistas em duas listas para podermos aplicar o filtro de especialidade sem perder os dados originais.
+  //dividindo dentista em duas listas para o filtro especialidade
   listaDentistasOriginal: any[] = []; 
   listaDentistasFiltrados: any[] = [];  
   idEspecialidadeSelecionada: string = '';
-  // Esse é o "molde" (payload) onde vamos montando a consulta conforme o usuário preenche o formulário.
+  // Estrutura do payload que será enviado para o Java
   agendamento = {
     idPaciente: '',
     idDentista: '',
@@ -46,9 +46,7 @@ export class NovoAgendamentoComponent implements OnInit {
 
  // Essa função roda assim que a tela abre
   ngOnInit() {
-    // 1. Bloqueio de datas no passado:
-    // Pegamos a data exata de hoje e formatamos no padrão do HTML (YYYY-MM-DD).
-    // Isso será usado na tela (min="{{dataMinima}}") para impedir agendamentos retroativos.
+    // 1. Bloqueio de datas no passado
     const hoje = new Date();
     const ano = hoje.getFullYear();
     const mes = String(hoje.getMonth() + 1).padStart(2, '0');
@@ -62,7 +60,7 @@ export class NovoAgendamentoComponent implements OnInit {
     // 3. Busca os dados reais do seu banco
     this.carregarDados();
   }
-  carregarDados() {
+carregarDados() {
     this.pacienteService.listar().subscribe(dados => this.listaPacientes = dados);
     
     // Carrega as especialidades
@@ -76,9 +74,9 @@ export class NovoAgendamentoComponent implements OnInit {
     });
   }
 
-  // FUNÇÃO DO FILTRO INTELIGENTE DE DENTISTAS
-  filtrarDentistas() {
-    // Se o usuário selecionou "Todas as Especialidades" (deixou vazio), devolvemos a lista inteira de dentistas.
+  // FUNÇÃO DE ROTEAMENTO (O FILTRO)
+filtrarDentistas() {
+    // Se a recepcionista selecionou "Todas as Especialidades" (vazio)
     if (!this.idEspecialidadeSelecionada) {
       this.listaDentistasFiltrados = this.listaDentistasOriginal;
       return;
@@ -97,7 +95,6 @@ export class NovoAgendamentoComponent implements OnInit {
   }
 
   salvar() {
-    // Esses console.logs são ferramentas valiosas para você (desenvolvedor) checar no F12 se os dados estão corretos.
     console.log('1. O botão de salvar foi acionado!');
     console.log('Dados capturados da tela:', this.agendamento);
 
@@ -114,8 +111,7 @@ export class NovoAgendamentoComponent implements OnInit {
       return;
     }
 
-    // 3. Cálculo Automático de Duração:
-    // O Back-end precisa saber a hora de término. Pegamos a hora escolhida e automaticamente somamos 1 hora a ela.
+    // 3. Cálculo de Duração: Formata a dataInicio e adiciona 1 hora para a dataEnding
     const dataInicioFormatada = `${this.agendamento.data}T${this.agendamento.hora}:00`;
     
     const dataFimObj = new Date(dataHoraSelecionada);
@@ -125,8 +121,7 @@ export class NovoAgendamentoComponent implements OnInit {
     const minutoFim = String(dataFimObj.getMinutes()).padStart(2, '0');
     const dataFimFormatada = `${this.agendamento.data}T${horaFim}:${minutoFim}:00`;
 
-    // 4. Montagem do Pacote Final (Payload):
-    // O Spring Boot espera objetos aninhados (ex: paciente: { id: X }). Aqui formatamos tudo do jeitinho que o Java gosta.
+    // 4. Monta o pacote no formato de objetos aninhados exigido pelo Spring Boot
     const payload = {
       paciente: { id: parseInt(this.agendamento.idPaciente) },
       dentista: { id: parseInt(this.agendamento.idDentista) },
@@ -146,7 +141,7 @@ export class NovoAgendamentoComponent implements OnInit {
       },
       error: (erro) => {
         console.error('Erro retornado pelo Java:', erro);
-        // Se o Java chiar (por exemplo, dentista ocupado nesse horário), mostramos a mensagem de erro que veio de lá!
+        // Exibe a mensagem de conflito de horário enviada pelo Java, se houver
         alert(erro.error?.message || 'Falha ao agendar. Verifique horários conflitantes.');
       }
     });

@@ -34,8 +34,7 @@ export class CadastroDentistaComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    // 1. Prepara a tela buscando as especialidades ativas.
-    // Fazemos um '.filter' para garantir que o recepcionista não vincule o dentista a uma especialidade inativa.
+    // 1. Busca todas as especialidades ativas no banco de dados para montar os checkboxes
     this.especialidadeService.listar().subscribe({
       next: (dados: any) => {
         this.listaEspecialidades = dados.filter((e: any) => e.ativo === true);
@@ -43,14 +42,12 @@ export class CadastroDentistaComponent implements OnInit {
       error: (err: any) => console.error('Erro ao carregar especialidades', err)
     });
 
-    // 2. Lógica de "Dupla Função" (Cadastro x Edição):
-    // Lemos a URL da página. Se houver um 'id' na rota (ex: /dentistas/editar/5), sabemos que o usuário quer EDITAR.
+    // 2. Lógica para verificar se é uma Edição
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
       this.dentistaIdParaEdicao = Number(id);
       this.tituloPagina = 'Editar Dentista';
 
-      // Vai no Back-end, busca os dados daquele dentista específico e preenche a tela automaticamente.
       this.dentistaService.buscarPorId(this.dentistaIdParaEdicao).subscribe({
         next: (dados) => this.dentista = dados,
         error: (err) => console.error('Erro ao carregar dentista', err)
@@ -58,31 +55,26 @@ export class CadastroDentistaComponent implements OnInit {
     }
   }
 
-  // Função chamada pelo HTML (nos checkboxes) para descobrir se a caixinha deve aparecer marcada ou não.
+  // Verifica se o dentista já tem essa especialidade (usado na edição para deixar a caixa marcada)
   isEspecialidadeSelecionada(idEspecialidade: number): boolean {
     if (!this.dentista.especialidades) return false;
-    // 'some()' percorre a lista e retorna 'true' se encontrar o ID.
     return this.dentista.especialidades.some((e: any) => e.id === idEspecialidade);
   }
 
-  // Essa função escuta toda vez que o usuário clica num Checkbox de Especialidade.
+  // Adiciona ou remove a especialidade na lista do dentista quando o usuário clica
   toggleEspecialidade(especialidade: any, event: any) {
-    // Prevenção de erro: garante que o array existe antes de usá-lo.
     if (!this.dentista.especialidades) {
       this.dentista.especialidades = [];
     }
 
     if (event.target.checked) {
-      // Se ele MARCOU a caixa, empurramos (push) a especialidade pra dentro do array.
       this.dentista.especialidades.push({ id: especialidade.id, nome: especialidade.nome });
     } else {
-      // Se ele DESMARCOU a caixa, nós recriamos o array tirando apenas a especialidade que ele desmarcou.
       this.dentista.especialidades = this.dentista.especialidades.filter((e: any) => e.id !== especialidade.id);
     }
   }
 
   salvar()  {
-    // O pulo do gato: Se for edição, chama o Atualizar (PUT). Se for novo, chama o Cadastrar (POST).
     if (this.dentistaIdParaEdicao) {
       this.dentistaService.atualizar(this.dentistaIdParaEdicao, this.dentista).subscribe({
         next: ()   => {
