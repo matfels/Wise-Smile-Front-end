@@ -29,6 +29,7 @@ export class DentistasComponent implements OnInit {
     });
   }
 
+  // Getter para o filtro rápido (Ativos/Inativos/Todos).
   get dentistasFiltrados() {
     if (this.filtroStatus === 'ATIVOS') return this.listaDentistas.filter(d => d.ativo === true);
     if (this.filtroStatus === 'INATIVOS') return this.listaDentistas.filter(d => d.ativo === false);

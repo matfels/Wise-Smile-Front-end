@@ -13,19 +13,23 @@ import { FormsModule } from '@angular/forms'; // <-- Adicionado para os filtros 
 })
 export class AgendaComponent implements OnInit {
   
+  // Aqui guardamos a lista "original" de todas as consultas que o Back-end nos devolve
   listaConsultas: any[] = [];
 
-  // Variáveis para capturar o que o usuário digitar nos filtros
+  // Estas variáveis ficam ligadas ao HTML via [(ngModel)]. 
+  // Tudo que o usuário digitar na tela, é atualizado aqui em tempo real.
   filtroPaciente: string = '';
   filtroDentista: string = '';
   filtroStatus: string = 'TODOS';
 
   constructor(private agendamentoService: AgendamentoService) {}
 
+  // O ngOnInit é executado assim que a tela abre. Por isso, chamamos o carregamento dos dados aqui.
   ngOnInit() {
     this.carregarConsultas();
   }
 
+  // Função que vai lá no serviço (que vai no Back-end) buscar os dados
   carregarConsultas() {
     this.agendamentoService.listar().subscribe({
       next: (dados) => {
@@ -33,18 +37,20 @@ export class AgendaComponent implements OnInit {
       },
       error: (err) => console.error('Erro ao carregar a agenda', err)
     });
-
   }
 
+  // Acionado quando o usuário clica em "Cancelar Consulta"
   cancelarConsulta(id: number) {
+    // Abre uma janelinha (prompt) nativa do navegador pedindo texto
     const motivo = prompt("Por favor, digite o motivo do cancelamento:");
     
+    // Verifica se o usuário escreveu alguma coisa e se não preencheu só com espaços vazios
     if (motivo && motivo.trim() !== "") {
       // Chama o seu service passando o ID e o motivo como parâmetro de URL
       this.agendamentoService.cancelarConsulta(id, motivo).subscribe({
         next: () => {
           alert("Consulta cancelada com sucesso.");
-          this.carregarConsultas(); // Recarrega a lista
+          this.carregarConsultas(); // Recarrega a lista para mostrar o novo status "CANCELADA"
         },
         error: (err) => alert("Erro ao cancelar: " + err.error)
       });
@@ -57,24 +63,26 @@ export class AgendaComponent implements OnInit {
 get consultasFiltradas() {
     return this.listaConsultas.filter(consulta => {
       
-      // 1. Captura os nomes com segurança (tenta os dois formatos comuns do Spring Boot)
+      // 1. Captura os nomes do paciente e dentista garantindo que não de erro (undefined).
+      // O '.toLowerCase()' converte tudo para minúsculo para facilitar a comparação depois.
       const nomePac = (consulta.paciente?.nome || consulta.pacienteNome || '').toString().toLowerCase();
       const nomeDent = (consulta.dentista?.nome || consulta.dentistaNome || '').toString().toLowerCase();
       
-      // 2. Padroniza o status que vem do banco para tudo MAIÚSCULO
+      // 2. Padroniza o status que vem do banco para ficar em MAIÚSCULO (como AGENDADA, FINALIZADA)
       const statusConsulta = (consulta.status || '').toString().toUpperCase();
 
-      // 3. Captura o que você digitou nos filtros (tudo minúsculo para comparar direito)
+      // 3. Captura o que o usuário digitou nos campos de texto da tela e converte para minúsculo
       const buscaPac = this.filtroPaciente.trim().toLowerCase();
       const buscaDent = this.filtroDentista.trim().toLowerCase();
       const buscaStatus = this.filtroStatus.toUpperCase();
 
-      // 4. Faz os testes
+      // 4. Faz os testes: ".includes()" verifica se o que digitamos está dentro do nome da pessoa.
       const matchPaciente = nomePac.includes(buscaPac);
       const matchDentista = nomeDent.includes(buscaDent);
+      // Pro status, basta ver se a pessoa escolheu "TODOS" ou se escolheu o status exato.
       const matchStatus = buscaStatus === 'TODOS' || statusConsulta === buscaStatus;
 
-      // Só exibe a linha se passar nos três filtros
+      // 5. O '.filter' só vai manter a consulta na tela se ela der 'true' nesses três testes!
       return matchPaciente && matchDentista && matchStatus;
     });
   } 
