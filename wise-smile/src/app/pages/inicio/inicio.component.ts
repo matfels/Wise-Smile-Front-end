@@ -20,6 +20,7 @@ export class InicioComponent implements OnInit {
   totalConsultasHoje: number = 0;
   totalPacientesAtivos: number = 0;
   totalDentistasAtivos: number = 0;
+  totalFinalizadasHoje: number = 0;
 
   constructor(
     private router: Router,
@@ -44,6 +45,7 @@ carregarAgendaDashboard() {
         const mes = String(hoje.getMonth() + 1).padStart(2, '0');
         const dia = String(hoje.getDate()).padStart(2, '0');
         const dataHojeParaFiltro = `${ano}-${mes}-${dia}`;
+        
 
         // 2. Filtra a lista para manter APENAS as consultas de hoje
         const apenasHoje = dados.filter(consulta => {
@@ -55,6 +57,8 @@ carregarAgendaDashboard() {
         
         this.consultasDoDia = apenasHoje.slice(0, 5);
         this.totalConsultasHoje = apenasHoje.length;
+        this.totalFinalizadasHoje = apenasHoje.filter(c => c.status === 'FINALIZADA').length;
+        this.consultasDoDia = apenasHoje.slice(0, 5);
       },
       error: (err) => console.error('Erro ao carregar a agenda no dashboard', err)
     });
